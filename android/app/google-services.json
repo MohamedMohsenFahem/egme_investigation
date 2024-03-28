@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "989101463926",
+    "project_id": "egme-investigation-b2de6",
+    "storage_bucket": "egme-investigation-b2de6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989101463926:android:df0e6fbb946b9dac458257",
+        "android_client_info": {
+          "package_name": "com.example.egme_investigation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF7xSaLZrrecACzburAnALKBywepdOgiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
