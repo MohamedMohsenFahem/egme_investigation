@@ -1,6 +1,6 @@
 import 'package:egme_investigation/screens/Air%20Cairo/air_cairo.dart';
 import 'package:egme_investigation/screens/Other%20Customers/other_customer.dart';
-import 'package:egme_investigation/screens/egma/egma.dart';
+import 'package:egme_investigation/screens/egme/egma.dart';
 import 'package:egme_investigation/screens/login_regest_forget/optionsLogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const EGMA()),
+                    MaterialPageRoute(builder: (context) => EGME()),
                   );
                 },
               ),
