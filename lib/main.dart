@@ -4,14 +4,14 @@ import 'firebase_options.dart';
 import 'screens/splash_screen.dart';
 
 void main() async {
-  runApp(const Egme());
+  runApp(const emge_investigation());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 }
 
-class Egme extends StatelessWidget {
-  const Egme({super.key});
+class emge_investigation extends StatelessWidget {
+  const emge_investigation({super.key});
 
   // This widget is the root of your application.
   @override

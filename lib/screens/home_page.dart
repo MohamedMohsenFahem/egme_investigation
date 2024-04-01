@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EGME()),
+                    MaterialPageRoute(builder: (context) => EGME(item: null,)),
                   );
                 },
               ),
@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AirCairo()),
+                    MaterialPageRoute(builder: (context) =>  AirCairo()),
                   );
                 },
               ),
@@ -130,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OtherCustomers()),
+                        builder: (context) =>  OtherCustomers()),
                   );
                 },
               ),
