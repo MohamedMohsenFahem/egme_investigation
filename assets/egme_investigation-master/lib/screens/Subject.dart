@@ -84,7 +84,7 @@ class Subject extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
-                  color:  Color(0xFF7BC8E7),
+                  color:  Color(0xFFAFE1F5),
                 ),
                 child: Text(
                   subject_items.summary,
