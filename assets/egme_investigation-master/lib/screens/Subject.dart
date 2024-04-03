@@ -12,26 +12,26 @@ class Subject extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: Color(0xFFD5F7F6),
+        color: Colors.lightBlue[50],
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 padding: EdgeInsets.all(6.0),
                 decoration: BoxDecoration(
-                  color: Color(0xFF659A9A),
+                  color: Color(0xFF68BADB),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Event name: ${subject_items.event}',
+                    'Event name : ${subject_items.event}',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 30,
                     ),
                   ),
                 ),
@@ -40,10 +40,20 @@ class Subject extends StatelessWidget {
                 height: 8.0,
               ),
               Text(
-                'Work at ${doctor.workAt}',
+                'Date: ${subject_items.date}',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+                  fontSize: 20.0,
+                ),
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                'Location: ${subject_items.location}',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
                 ),
               ),
               SizedBox(
@@ -52,15 +62,15 @@ class Subject extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(6.0),
                 decoration: BoxDecoration(
-                  color: Color(0xFF659A9A),
+                  color: Color(0xFF68BADB),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    'Description',
+                    'Summary',
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
@@ -70,62 +80,63 @@ class Subject extends StatelessWidget {
                 height: 15.0,
               ),
               Container(
-                height: 200,
+                height: 80,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
-                  color: Color(0xFF8BC0C0),
+                  color:  Color(0xFF7BC8E7),
                 ),
                 child: Text(
-                  doctor.description,
+                  subject_items.summary,
                   softWrap: true,
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 25.0,
                   ),
                 ),
               ),
               SizedBox(
                 height: 40.0,
               ),
-              Container(
-                alignment: Alignment.bottomLeft,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xFF8BC0C0),
-                      blurRadius: 3.0,
-                    ),
-                  ],
-                ),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Contact us: ',
-                        selectionColor: Colors.teal,
-                        style: TextStyle(fontSize: 16.0, color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      Text(
-                        'phone number: ${doctor.number}',
-                        style: TextStyle(fontSize: 15.0, color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      Text(
-                        'Email: ${doctor.email}',
-                        style: TextStyle(fontSize: 15.0, color: Colors.black),
-                      ),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                    ],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Rod cause: ${subject_items.Rod_couse}',
+                    selectionColor: Colors.teal,
+                    style: TextStyle(fontSize: 30.0, color: Colors.black),
                   ),
-                ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    'Hazard: ${subject_items.hazard}',
+                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    'Risk index: ${subject_items.risk_index}',
+                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    'Reason: ${subject_items.reason}',
+                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    'Recommendation: ${subject_items.recommendation}',
+                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                ],
               ),
             ],
           ),
