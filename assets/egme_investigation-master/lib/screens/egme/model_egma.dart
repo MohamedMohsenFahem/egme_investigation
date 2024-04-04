@@ -1,5 +1,3 @@
-import 'package:egme_investigation/screens/Subject.dart';
-import 'package:flutter/material.dart';
 
 class Subject_model {
   String event;
@@ -9,9 +7,9 @@ class Subject_model {
   final String Rod_couse;
   final String hazard;
   final String risk_index;
-  final int reason;
+  final String reason;
   final String location;
-  final int recommendation;
+  final String recommendation;
 
   Subject_model({
     required this.event,
@@ -25,7 +23,6 @@ class Subject_model {
     required this.risk_index,
     required this.Rod_couse
   });
-  @override
   List<Object?> get props => [
     event,
     Reg,
