@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import '../Subject.dart';
 
-class Air_Cairo extends StatefulWidget {
-  Air_Cairo({super.key, });
+class Other_Customer extends StatefulWidget {
+  Other_Customer({super.key, });
 
   @override
-  State<Air_Cairo> createState() => _Air_CairoState();
+  State<Other_Customer> createState() => _Other_CustomerState();
 }
 
-class _Air_CairoState extends State<Air_Cairo> {
+class _Other_CustomerState extends State<Other_Customer> {
   List<Subject_model>? subject = [
     Subject_model(
       date: '6/1/2024',
@@ -53,7 +53,7 @@ class _Air_CairoState extends State<Air_Cairo> {
         elevation: 0.1,
         backgroundColor: Colors.lightBlue[50],
         title: Text(
-            'Air Cairo'
+            'Other Customer'
         ),
       ),
       body: Container(
