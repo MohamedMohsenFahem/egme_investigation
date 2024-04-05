@@ -1,4 +1,4 @@
-import 'package:egme_investigation/screens/Air%20Cairo/air_cairo.dart';
+import 'package:egme_investigation/screens/AirCairo/air_cairo.dart';
 import 'package:egme_investigation/screens/Other%20Customers/other_customer.dart';
 import 'package:egme_investigation/screens/egme/egma.dart';
 import 'package:egme_investigation/screens/login_regest_forget/optionsLogin.dart';
@@ -39,15 +39,17 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.lightBlue[50],
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              height: 300,
-              width: 500,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/logo.png"),
-                  fit: BoxFit.fill,
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                height: 300,
+                width: 500,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/logo.png"),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
@@ -61,10 +63,10 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.blue.shade600),
-              width: double.infinity,
+              width: 500,
               child: TextButton(
                 child: Text(
-                  'EGMA',
+                  'EGME',
                   style: TextStyle(color: Colors.white),
                 ),
                 style: TextButton.styleFrom(
@@ -73,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EGME(item: null,)),
+                    MaterialPageRoute(builder: (context) => EGME()),
                   );
                 },
               ),
@@ -88,7 +90,7 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.blue.shade600),
-              width: double.infinity,
+              width: 500,
               child: TextButton(
                 child: Text(
                   'Air Cairo',
@@ -115,7 +117,7 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.blue.shade600),
-              width: double.infinity,
+              width: 500,
               child: TextButton(
                 child: Text(
                   'Other Customers',
@@ -130,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  OtherCustomers()),
+                        builder: (context) =>  Other_Customer()),
                   );
                 },
               ),

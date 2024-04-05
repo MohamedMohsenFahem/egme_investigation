@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AirCairo extends StatelessWidget {
-   AirCairo({super.key});
+  AirCairo({super.key});
 
   @override
   Widget build(BuildContext context) {
