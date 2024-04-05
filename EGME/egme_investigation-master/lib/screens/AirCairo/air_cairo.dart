@@ -1,30 +1,28 @@
-import 'package:egme_investigation/screens/egme/Subject_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:egme_investigation/screens/egme/Subject_model.dart';
 
 import '../Subject.dart';
 
-class EGME extends StatefulWidget {
-  EGME({
-    super.key,
-  });
+
+class AirCairo extends StatefulWidget {
+  AirCairo({super.key});
 
   @override
-  State<EGME> createState() => _EGMEState();
+  State<AirCairo> createState() => _AirCairoState();
 }
 
-class _EGMEState extends State<EGME> {
+class _AirCairoState extends State<AirCairo> {
   List<Subject_model>? subject = [
     Subject_model(
       date: '6/1/2024',
       event:
-          'إكتشاف تآكل فى Damage in Eng. #2 Outboard Heat Shield of C-Duct  ',
+      'إكتشاف تآكل فى Damage in Eng. #2 Outboard Heat Shield of C-Duct  ',
       hazard: 'Maintenance Activity Error (Installation Error)   ',
       location: 'الكشف الأسبوعى ',
       reason:
-          ' من المرجح بأن سبب الواقعة يرجع نتيجة عدم الربط الجيد للـ  Unionخاص بماسورة Sensing Line Air المتصل بصمام PRV مما أدى إلى حدوث خروج هواء ساخن من خلالها أدى إلى تآكل الطبقة العازلة لــ C-duct  R-Sleeveالمحرك رقم (2) ',
+      '1- من المرجح بأن سبب الواقعة يرجع نتيجة عدم الربط الجيد للـ  Unionخاص بماسورة Sensing Line Air المتصل بصمام PRV مما أدى إلى حدوث خروج هواء ساخن من خلالها أدى إلى تآكل الطبقة العازلة لــ C-duct  R-Sleeveالمحرك رقم (2) ',
       recommendation:
-          '1-نشر الواقعة على السادة المهندسين / الفنيين بالصيانة اليومية / الدورية للتوعية بها.'
+      '1-نشر الواقعة على السادة المهندسين / الفنيين بالصيانة اليومية / الدورية للتوعية بها.'
           '\n2--	التنبية على السادة المهندسين / الفنيين بالتفتيش الجيد على المحرك وكذلك الأجزاء التى يتم فكها عند تغيير Fuel Nozzle لتفادى تكرار مثل هذه الواقعة مستقبلا.'
           '\n3--	الصيانة اليومية الإلتزام على ما جاء فىLPM  من متابعة العيوب فى أول رحلة بعد أى كشف من الهنجر.'
           '\nLPM-LM-Ramp-05 A/C Acceptance between BM & LM'
@@ -32,9 +30,9 @@ class _EGMEState extends State<EGME> {
       Reg: 'GFL',
       risk_index: '3C',
       Rod_couse:
-          'من المرجح بأن سبب الواقعة يرجع نتيجة عدم الربط الجيد للـ  Unionخاص بماسورة Sensing Line Air المتصل بصمام PRV مما أدى إلى حدوث خروج هواء ساخن من خلالها أدى إلى تآكل الطبقة العازلة لــ C-duct  R-Sleeveالمحرك رقم (2) ـ ',
+      'من المرجح بأن سبب الواقعة يرجع نتيجة عدم الربط الجيد للـ  Unionخاص بماسورة Sensing Line Air المتصل بصمام PRV مما أدى إلى حدوث خروج هواء ساخن من خلالها أدى إلى تآكل الطبقة العازلة لــ C-duct  R-Sleeveالمحرك رقم (2) ـ ',
       summary:
-          'عند تنفيذ W.O (Eng. #2 HPTACC Inspection) الخاص بتغيير Eng. #2 Fuel Nozzle فى الكشف الأسبوعى للطائرة إكتشف مهندس الطائرة عن وجود تآكل فىDamage in Eng. #2 R.H.S Outboard Heat Shield of C-Duct وبالتالى قام بتحرير تقرير البلاغ رقم (Occ. # 2110).',
+      '1-	عند تنفيذ W.O (Eng. #2 HPTACC Inspection) الخاص بتغيير Eng. #2 Fuel Nozzle فى الكشف الأسبوعى للطائرة إكتشف مهندس الطائرة عن وجود تآكل فىDamage in Eng. #2 R.H.S Outboard Heat Shield of C-Duct وبالتالى قام بتحرير تقرير البلاغ رقم (Occ. # 2110).',
     ),
     Subject_model(
       date: ' ',
@@ -145,8 +143,11 @@ class _EGMEState extends State<EGME> {
       summary: '',
     ),
   ];
+
   List<Subject_model>? _foundSubject = [];
+
   bool _showSearchBar = false;
+
   @override
   void initState() {
     _foundSubject = subject;
@@ -160,7 +161,7 @@ class _EGMEState extends State<EGME> {
     } else {
       results = subject
           ?.where((user) =>
-              user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
     setState(() {
@@ -168,7 +169,7 @@ class _EGMEState extends State<EGME> {
     });
   }
 
-    @override
+  @override
 
 
   Widget build(BuildContext context) {
@@ -196,13 +197,13 @@ class _EGMEState extends State<EGME> {
                   ),
                 ),
               ),
-              Container(
+            Container(
                 child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: _foundSubject?.length,
-              itemBuilder: (context, index) =>
-                  customListTile(_foundSubject![index], context),
-            )),
+                  shrinkWrap: true,
+                  itemCount: _foundSubject?.length,
+                  itemBuilder: (context, index) =>
+                      customListTile(_foundSubject![index], context),
+                )),
 
           ],
         ),
@@ -230,7 +231,7 @@ class _EGMEState extends State<EGME> {
                   onPressed: () {
                     setState(() {
                       _showSearchBar =
-                          !_showSearchBar; // Toggle the search bar visibility
+                      !_showSearchBar; // Toggle the search bar visibility
                     });
                   },
                   child: Text(
@@ -279,13 +280,13 @@ class _EGMEState extends State<EGME> {
             ),
             child: ListTile(
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               leading: Container(
                 padding: EdgeInsets.only(right: 12.0),
                 decoration: new BoxDecoration(
                     border: new Border(
                         right:
-                            new BorderSide(width: 1.0, color: Colors.white24))),
+                        new BorderSide(width: 1.0, color: Colors.white24))),
                 child: Text(
                   subject.Reg,
                   style: TextStyle(
@@ -345,8 +346,8 @@ class _EGMEState extends State<EGME> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Subject(
-                              subject_items: subject,
-                            )),
+                          subject_items: subject,
+                        )),
                   );
                 },
                 icon: Icon(Icons.keyboard_arrow_left_outlined),
@@ -359,3 +360,4 @@ class _EGMEState extends State<EGME> {
     );
   }
 }
+
