@@ -1,7 +1,10 @@
-import 'package:egme_investigation/screens/egme/Subject_model.dart';
+import 'package:egme_investigation/screens/Other%20Customers/searchByLocationOther.dart';
+import 'package:egme_investigation/screens/Other%20Customers/searchByRegAirCairoOther.dart';
+import 'package:egme_investigation/screens/Subject_model.dart';
 import 'package:flutter/material.dart';
 
-import '../Subject.dart';
+import '../subject.dart';
+
 
 class Other_Customer extends StatefulWidget {
   Other_Customer({super.key, });
@@ -176,32 +179,35 @@ class _Other_CustomerState extends State<Other_Customer> {
         backgroundColor: Colors.lightBlue[50],
         title: Text('EGME'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (_showSearchBar)
-              Container(
-                alignment: AlignmentDirectional.topCenter,
-                decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(50),
-                ),
-                child: TextField(
-                  onChanged: (value) => _runFilter(value),
-                  decoration: const InputDecoration(
-                      labelText: 'Search',
-                      suffixIcon: Icon(Icons.search)
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              if (_showSearchBar)
+                Container(
+                  alignment: AlignmentDirectional.topCenter,
+                  decoration: BoxDecoration(
+                    borderRadius:BorderRadius.circular(50),
+                  ),
+                  child: TextField(
+                    onChanged: (value) => _runFilter(value),
+                    decoration: const InputDecoration(
+                        labelText: 'Search',
+                        suffixIcon: Icon(Icons.search)
+                    ),
                   ),
                 ),
-              ),
-            Container(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _foundSubject?.length,
-                  itemBuilder: (context, index) =>
-                      customListTile(_foundSubject![index], context),
-                )),
+              Container(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _foundSubject?.length,
+                    itemBuilder: (context, index) =>
+                        customListTile(_foundSubject![index], context),
+                  )),
 
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -217,12 +223,7 @@ class _Other_CustomerState extends State<Other_Customer> {
                     'Date',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   )),
-              TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Reg.',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  )),
+              DropdownRegOther(subject: subject),
               TextButton(
                   onPressed: () {
                     setState(() {
@@ -240,12 +241,7 @@ class _Other_CustomerState extends State<Other_Customer> {
                     'Hazard',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   )),
-              TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Location',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  )),
+              DropdownLocationOther(),
             ],
           ),
         ),

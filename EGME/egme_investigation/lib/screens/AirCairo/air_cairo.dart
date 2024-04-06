@@ -1,152 +1,45 @@
-import 'package:egme_investigation/screens/egme/Subject_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:egme_investigation/screens/AirCairo/searchByRegAirCairo.dart';
 import 'package:flutter/material.dart';
 
-import '../Subject.dart';
+import '../Subject_model.dart';
+import '../subject.dart';
 
-class EGME extends StatefulWidget {
-  EGME({
-    super.key,
-  });
+
+class AirCairo extends StatefulWidget {
+  AirCairo({super.key});
 
   @override
-  State<EGME> createState() => _EGMEState();
+  State<AirCairo> createState() => _AirCairoState();
 }
 
-class _EGMEState extends State<EGME> {
+class _AirCairoState extends State<AirCairo> {
   List<Subject_model>? subject = [
     Subject_model(
-      date: '6/1/2024',
-      event:
-          'إكتشاف تآكل فى Damage in Eng. #2 Outboard Heat Shield of C-Duct  ',
-      hazard: 'Maintenance Activity Error (Installation Error)   ',
-      location: 'الكشف الأسبوعى ',
-      reason:
-          ' من المرجح بأن سبب الواقعة يرجع نتيجة عدم الربط الجيد للـ  Unionخاص بماسورة Sensing Line Air المتصل بصمام PRV مما أدى إلى حدوث خروج هواء ساخن من خلالها أدى إلى تآكل الطبقة العازلة لــ C-duct  R-Sleeveالمحرك رقم (2) ',
-      recommendation:
-          '1-نشر الواقعة على السادة المهندسين / الفنيين بالصيانة اليومية / الدورية للتوعية بها.'
-          '\n2--	التنبية على السادة المهندسين / الفنيين بالتفتيش الجيد على المحرك وكذلك الأجزاء التى يتم فكها عند تغيير Fuel Nozzle لتفادى تكرار مثل هذه الواقعة مستقبلا.'
-          '\n3--	الصيانة اليومية الإلتزام على ما جاء فىLPM  من متابعة العيوب فى أول رحلة بعد أى كشف من الهنجر.'
-          '\nLPM-LM-Ramp-05 A/C Acceptance between BM & LM'
-          '\n4-دراسة إدراج الـTask of Removal & Installation of Full Set of Main Fuel Nozzle على أنهRII Task  ',
-      Reg: 'GFL',
-      risk_index: '3C',
-      Rod_couse:
-          'من المرجح بأن سبب الواقعة يرجع نتيجة عدم الربط الجيد للـ  Unionخاص بماسورة Sensing Line Air المتصل بصمام PRV مما أدى إلى حدوث خروج هواء ساخن من خلالها أدى إلى تآكل الطبقة العازلة لــ C-duct  R-Sleeveالمحرك رقم (2) ـ ',
-      summary:
-          'عند تنفيذ W.O (Eng. #2 HPTACC Inspection) الخاص بتغيير Eng. #2 Fuel Nozzle فى الكشف الأسبوعى للطائرة إكتشف مهندس الطائرة عن وجود تآكل فىDamage in Eng. #2 R.H.S Outboard Heat Shield of C-Duct وبالتالى قام بتحرير تقرير البلاغ رقم (Occ. # 2110).',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'go',
+      date: '10/2/2024',
+      event: 'عودة الطائرة من الجو بعد الطيران لظهور العيوب',
       hazard: '',
       location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
+      reason: 'من المرجح أن سبب الواقعة عدم تنفيذ إجراءات MEL 36-11-07B OPS PROC.  والخاص بـ'
+      '\nEng. # 2 Bleed & Eng. # 2 HP Valve طبقا للـ DFDR  والذى تم تحليله بواسطة Airbus  .'
+      '\n-  عدم الإكتشاف المبكر لوجودLoose   للـ Sense Line بين HPV & PRV  .',
+      recommendation: 'نشر الواقعة على السادة المهندسين بالصيانة اليومية / الدورية للتوعية بها.'
+      '\nمقترح خطاب للرد على شركة AirCairo.',
+      Reg: 'BUN',
       risk_index: '',
       Rod_couse: '',
-      summary: '',
+      summary: '•	الطائرة طرازA320Neo حروف تسجيل SU-BUN عند تنفيذ رحلتها المخططة القاهرة / جدة الرحلة رقم MSC459 بتاريخ 10/2/2024 عودة الطائرة من الجو بعد الطيران لظهور العيوب التالية بالطائرة: '
+          '\n-	Eng. Bleed 1&2 Fault.'
+          '\n-	Eng. # 2 HP Valve Fault.'
+          '\n-	Bleed # 1 not Supplying in Flight.'
+          '\nعلمًا بأن نفس الطائرة قد تم عودتها إلى الموقع بعد الدفع الخلفى لنفس الرحلة لوجود نفس العيب وقد تم إجراء تصحيحى بعمل Rest لكمبيوتر Bleed Monitoring Computer (BMC) 1&2.',
     ),
-    Subject_model(
-      date: ' ',
-      event: 'want',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'here',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'here',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'go',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'went',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'want',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'because',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
-    Subject_model(
-      date: ' ',
-      event: 'ok',
-      hazard: '',
-      location: '',
-      reason: '',
-      recommendation: '',
-      Reg: 'GOLF',
-      risk_index: '',
-      Rod_couse: '',
-      summary: '',
-    ),
+
   ];
+
   List<Subject_model>? _foundSubject = [];
+
   bool _showSearchBar = false;
+
   @override
   void initState() {
     _foundSubject = subject;
@@ -160,7 +53,7 @@ class _EGMEState extends State<EGME> {
     } else {
       results = subject
           ?.where((user) =>
-              user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
     setState(() {
@@ -168,9 +61,7 @@ class _EGMEState extends State<EGME> {
     });
   }
 
-    @override
-
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlue[50],
@@ -196,13 +87,13 @@ class _EGMEState extends State<EGME> {
                   ),
                 ),
               ),
-              Container(
+            Container(
                 child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: _foundSubject?.length,
-              itemBuilder: (context, index) =>
-                  customListTile(_foundSubject![index], context),
-            )),
+                  shrinkWrap: true,
+                  itemCount: _foundSubject?.length,
+                  itemBuilder: (context, index) =>
+                      customListTile(_foundSubject![index], context),
+                )),
 
           ],
         ),
@@ -220,17 +111,12 @@ class _EGMEState extends State<EGME> {
                     'Date',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   )),
-              TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Reg.',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  )),
+              DropdownRegAirCairo(subject: subject),
               TextButton(
                   onPressed: () {
                     setState(() {
                       _showSearchBar =
-                          !_showSearchBar; // Toggle the search bar visibility
+                      !_showSearchBar; // Toggle the search bar visibility
                     });
                   },
                   child: Text(
@@ -279,13 +165,13 @@ class _EGMEState extends State<EGME> {
             ),
             child: ListTile(
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               leading: Container(
                 padding: EdgeInsets.only(right: 12.0),
                 decoration: new BoxDecoration(
                     border: new Border(
                         right:
-                            new BorderSide(width: 1.0, color: Colors.white24))),
+                        new BorderSide(width: 1.0, color: Colors.white24))),
                 child: Text(
                   subject.Reg,
                   style: TextStyle(
@@ -345,8 +231,8 @@ class _EGMEState extends State<EGME> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Subject(
-                              subject_items: subject,
-                            )),
+                          subject_items: subject,
+                        )),
                   );
                 },
                 icon: Icon(Icons.keyboard_arrow_left_outlined),
@@ -359,3 +245,4 @@ class _EGMEState extends State<EGME> {
     );
   }
 }
+
