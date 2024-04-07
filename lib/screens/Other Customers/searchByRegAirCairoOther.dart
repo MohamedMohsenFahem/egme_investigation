@@ -1,21 +1,21 @@
+import 'package:egme_investigation/screens/egme/model_egma.dart';
 import 'package:flutter/material.dart';
 
-import '../Subject_model.dart';
 
 List<String> list = <String>[
-  'SU-BPU', 'SU-BPV', 'SU-BPW', 'SU-BPX', 'SU-BTM', 'SU-BUJ', 'SU-BUU',
-  'SU-BUV', 'SU-BVG', 'SU-BVH', 'SU-BVI', 'SU-BUK', 'SU-BUL', 'SU-BUM',
-  'SU-BUN', 'SU-BUP', 'SU-BUQ', 'SU-BUR', 'SU-BUS', 'SU-BUT', 'SU-BUX',
-  'SU-BUY', 'SU-BUZ', 'SU-BUJ', 'SU-BUK'
+  'BPU', 'BPV', 'BPW', 'BPX', 'BTM', 'BUJ', 'BUU',
+  'BUV', 'BVG', 'BVH', 'BVI', 'BUK', 'BUL', 'BUM',
+  'BUN', 'BUP', 'BUQ', 'BUR', 'BUS', 'BUT', 'BUX',
+  'BUY', 'BUZ', 'BUJ', 'BUK'
 ];
-class DropdownRegAirCairo extends StatefulWidget {
+class DropdownRegOther extends StatefulWidget {
   final List<Subject_model>? subject;
-  DropdownRegAirCairo({super.key ,required this.subject});
+   DropdownRegOther({super.key ,required this.subject});
   @override
-  State<DropdownRegAirCairo> createState() => _DropdownRegAirCairoState();
+  State<DropdownRegOther> createState() => _DropdownRegOtherState();
 }
 
-class _DropdownRegAirCairoState extends State<DropdownRegAirCairo> {
+class _DropdownRegOtherState extends State<DropdownRegOther> {
   List<Subject_model>? _foundSubject = [];
 
   void initState() {

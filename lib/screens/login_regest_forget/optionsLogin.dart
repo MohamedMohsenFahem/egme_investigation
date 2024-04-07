@@ -11,6 +11,7 @@ class Options extends StatelessWidget {
         length: 2,
         child: Scaffold(
             appBar: AppBar(
+
               toolbarHeight: 10,
               shadowColor: Theme.of(context).shadowColor,
               backgroundColor: Colors.lightBlue[50],

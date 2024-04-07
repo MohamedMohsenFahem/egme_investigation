@@ -15,130 +15,288 @@ class Subject extends StatelessWidget {
         color: Colors.lightBlue[50],
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF68BADB),
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Event name : ${subject_items.event}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF68BADB),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${subject_items.event}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              Text(
-                'Date: ${subject_items.date}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+                SizedBox(
+                  height: 8.0,
                 ),
-              ),
-              SizedBox(
-                height: 16.0,
-              ),
-              Text(
-                'Location: ${subject_items.location}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
-              ),
-              SizedBox(
-                height: 16.0,
-              ),
-              Container(
-                padding: EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF68BADB),
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Summary',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Container(
-                height: 80,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  color:  Color(0xFFAFE1F5),
-                ),
-                child: Text(
-                  subject_items.summary,
-                  softWrap: true,
+                Text(
+                  'Date: ${subject_items.date}',
                   style: TextStyle(
-                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Rod cause: ${subject_items.Rod_couse}',
-                    selectionColor: Colors.teal,
-                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Text(
+                  '${subject_items.location}:Location',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
                   ),
-                  SizedBox(
-                    height: 20.0,
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Container(
+                  padding: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF68BADB),
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                  Text(
-                    'Hazard: ${subject_items.hazard}',
-                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Summary',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
-                  SizedBox(
-                    height: 20.0,
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color:  Color(0xFFAFE1F5),
                   ),
-                  Text(
-                    'Risk index: ${subject_items.risk_index}',
-                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  child: Text(
+                    subject_items.summary,
+                    softWrap: true,
+                    style: TextStyle(fontSize: 20.0,),
                   ),
-                  SizedBox(
-                    height: 20.0,
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Row(
+
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF68BADB),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Rod Cause',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15.0,
+                        ),
+                        Container(
+                          height: 80,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color:  Color(0xFFAFE1F5),
+                          ),
+                          child: Text(
+                            subject_items.Rod_couse,
+                            softWrap: true,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF68BADB),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Hazard',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15.0,
+                        ),
+                        Container(
+                          height: 80,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color:  Color(0xFFAFE1F5),
+                          ),
+                          child: Text(
+                            subject_items.hazard,
+                            softWrap: true,
+                            style: TextStyle(
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  padding: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF68BADB),
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                  Text(
-                    'Reason: ${subject_items.reason}',
-                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Risk index',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
-                  SizedBox(
-                    height: 20.0,
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  height: 80,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color:  Color(0xFFAFE1F5),
                   ),
-                  Text(
-                    'Recommendation: ${subject_items.recommendation}',
-                    style: TextStyle(fontSize: 30.0, color: Colors.black),
+                  child: Text(
+                    subject_items.risk_index,
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
                   ),
-                  SizedBox(
-                    height: 20.0,
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  padding: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF68BADB),
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                ],
-              ),
-            ],
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Reason',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color:  Color(0xFFAFE1F5),
+                  ),
+                  child: Text(
+                    subject_items.reason,
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  padding: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF68BADB),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Recommendation',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color:  Color(0xFFAFE1F5),
+                  ),
+                  child: Text(
+                    subject_items.recommendation,
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
