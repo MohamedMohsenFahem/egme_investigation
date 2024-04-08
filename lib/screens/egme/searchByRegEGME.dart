@@ -1,6 +1,5 @@
+import 'package:egme_investigation/screens/egme/model_egma.dart';
 import 'package:flutter/material.dart';
-
-import '../Subject_model.dart';
 
 List<String> list = <String>[
   'SU-GDL', 'SU-GDM','SU-GDN','SU-GDO','SU-GDP','SU-GDR', 'SU-GER', 'SU-GES',

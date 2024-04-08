@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -68,14 +71,5 @@ class DefaultFirebaseOptions {
     projectId: 'egme-investigation-b2de6',
     storageBucket: 'egme-investigation-b2de6.appspot.com',
     iosBundleId: 'com.example.egmeInvestigation',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCnJMBdgBYjhsjWdUWzati6gg3Ng_AVj2Y',
-    appId: '1:989101463926:ios:b54370c841c6c707458257',
-    messagingSenderId: '989101463926',
-    projectId: 'egme-investigation-b2de6',
-    storageBucket: 'egme-investigation-b2de6.appspot.com',
-    iosBundleId: 'com.example.egmeInvestigation.RunnerTests',
   );
 }
