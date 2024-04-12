@@ -1,4 +1,5 @@
-import 'package:egme_investigation/screens/Subject_model.dart';
+import 'package:egme_investigation/screens/Subject/Subject_Model.dart';
+import 'package:egme_investigation/screens/Subject/addSubject.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

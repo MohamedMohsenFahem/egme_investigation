@@ -1,6 +1,9 @@
-import 'package:egme_investigation/screens/Subject_model.dart';
+import 'package:egme_investigation/screens/Subject/Subject_Model.dart';
+import 'package:egme_investigation/screens/Subject/addSubject.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../subject.dart';
+import 'package:flutter/widgets.dart';
+import '../Subject/subject.dart';
 
 class EGME extends StatefulWidget {
   EGME({
@@ -12,6 +15,7 @@ class EGME extends StatefulWidget {
 }
 
 List<String> listReg = <String>[
+  'Reg',
   'SU-GDL',
   'SU-GDM',
   'SU-GDN',
@@ -105,9 +109,29 @@ List<String> listReg = <String>[
   'SU-GDK'
 ];
 List<String> listLocation = <String>[
-  'الكشف الأسبوعى',
-  'عودة رحلة شرم الشيخ وتجهيزها للإقلاع لرحلة جدة',
-  'بهنجر 8000',
+  'Location',
+  'Line shifts',
+  ' Weeky check',
+  'Tech.support',
+  'Line jcc',
+  ' Mcc',
+  'Bm H6000',
+  'BM H7000',
+  'BM H8000',
+  'ENGINE SHOP',
+  'MECH.SHOP',
+  'ELECT .SHOP',
+  ' BRAKE. SHOP',
+  'IERA SHOPS',
+  'Atic shop',
+  'Stores',
+  'Incoming inspection',
+  'Logistics',
+  'Repair and warranty',
+  'Came',
+  'Tech.services',
+  'Safety',
+  'Quality',
 ];
 
 class _EGMEState extends State<EGME> {
@@ -135,7 +159,7 @@ class _EGMEState extends State<EGME> {
       date: '3/2/2024',
       event: 'MLG Wheel #2 Low Pressure',
       hazard: 'Maintenance Data Not Followed',
-      location: 'عودة رحلة شرم الشيخ وتجهيزها للإقلاع لرحلة جدة ',
+      location: 'عودة رحلة شرم الشيخ',
       recommendation: '1.	MOE 2-16 Release to Service Procedure'
           '\n2.	line maintenance check (Transit/Pre-flight)'
           '\n3.	AMM Task Card 12-15-51/301'
@@ -168,7 +192,7 @@ class _EGMEState extends State<EGME> {
       date: '7/2/2024',
       event:
           'During A/C Jigging Damage Occurred to Aft Fuselage Safety Stay Area',
-      hazard: 'Tools/Equipment/Used Improperly',
+      hazard: 'Tools/equipment used improperly',
       location: 'بهنجر 8000',
       Rod_couse:
           '1.	قيام طاقم الفنيين بتقريب الـ Safety Jack إلى جسم الطائرة على الرغم من أن Safety Jack أخر مرحلة لتأمين الطائرة.'
@@ -329,7 +353,7 @@ class _EGMEState extends State<EGME> {
       } else {
         _foundSubject = subject
             ?.where((user) =>
-            user.Reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
+                user.Reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
             .toList();
       }
     });
@@ -337,158 +361,217 @@ class _EGMEState extends State<EGME> {
 
   void _runFilterLocation(String enteredKeyword) {
     setState(() {
-        _foundSubject = subject
-            ?.where((user) =>
-            user.location.toLowerCase().contains(enteredKeyword.toLowerCase()))
-            .toList();
-
+      _foundSubject = subject
+          ?.where((user) => user.location
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 5,
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.lightBlue[50],
+      appBar: AppBar(
         backgroundColor: Colors.lightBlue[50],
-        appBar: AppBar(
-          elevation: 0.1,
-          backgroundColor: Colors.lightBlue[50],
-          title: Text('EGME'),
-          bottom: TabBar(tabs: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Date',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                DropdownButton<String>(
-                  value: dropdownValueReg,
-                  icon: const Icon(Icons.arrow_downward),
-                  elevation: 16,
-                  underline: Container(
-                    height: 5,
-                    width: 50,
-                  ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValueReg = value!;
-                      _runFilterReg(value);
-                    });
-                  },
-                  items: listReg.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _showSearchHazard = false;
-                        _showSearchSubject =
-                            !_showSearchSubject; // Toggle the search bar visibility
-                      });
-                    },
-                    child: Text(
-                      'Subject',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _showSearchSubject = false;
-                        _showSearchHazard =
-                            !_showSearchHazard; // Toggle the search bar visibility
-                      });
-                    },
-                    child: Text(
-                      'Hazard',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                DropdownButton<String>(
-                  value: dropdownValueLocation,
-                  icon: const Icon(Icons.arrow_downward),
-                  elevation: 16,
-                  underline: Container(
-                    height: 5,
-                    width: 50,
-                  ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValueLocation = value!;
-                      _runFilterLocation(value);
-                    });
-                  },
-                  items: listLocation.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ],
-            ),
-          ]),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                if (_showSearchHazard)
+        title: Text('EGME'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(80),
-                      shape: BoxShape.rectangle,
+                      border: Border(
+                        right: BorderSide(
+                            style: BorderStyle.solid,
+                            width: 1,
+                            color: Colors.black),
+                      ),
                     ),
-                    child: Autocomplete<String>(
-                      optionsBuilder: (TextEditingValue textEditingValue) {
-                        if (textEditingValue.text == '') {
-                          return Iterable<String>.empty();
-                        }
-                        return _suggestions.where((String item) {
-                          return item
-                              .contains(textEditingValue.text.toLowerCase());
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Date',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        )),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        right: BorderSide(
+                            style: BorderStyle.solid,
+                            width: 1.0,
+                            color: Colors.black),
+                      ),
+                    ),
+                    child: DropdownButton<String>(
+                      value: dropdownValueReg,
+                      icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      underline: Container(
+                        height: 5,
+                        width: 50,
+                      ),
+                      onChanged: (String? value) {
+                        // This is called when the user selects an item.
+                        setState(() {
+                          dropdownValueReg = value!;
+                          _runFilterReg(value);
                         });
                       },
-                      onSelected: (String item) {
-                        _runFilterHazard(item);
-                      },
+                      items:
+                          listReg.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
-                if (_showSearchSubject)
                   Container(
-                    alignment: AlignmentDirectional.topCenter,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
+                      border: Border(
+                        right: BorderSide(
+                            style: BorderStyle.solid,
+                            width: 1.0,
+                            color: Colors.black),
+                      ),
                     ),
-                    child: TextField(
-                      onChanged: (value) => _runFilterSubject(value),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          labelText: 'Search By Subject',
-                          suffixIcon: Icon(Icons.search)),
-                    ),
+                    child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _showSearchHazard = false;
+                            _showSearchSubject =
+                                !_showSearchSubject; // Toggle the search bar visibility
+                          });
+                        },
+                        child: Text(
+                          'Subject',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        )),
                   ),
-                Container(
-                    child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _foundSubject?.length,
-                  itemBuilder: (context, index) =>
-                      customListTile(_foundSubject![index], context),
-                )),
-              ],
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        right: BorderSide(
+                            style: BorderStyle.solid,
+                            width: 1.0,
+                            color: Colors.black),
+                      ),
+                    ),
+                    child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _showSearchSubject = false;
+                            _showSearchHazard =
+                                !_showSearchHazard; // Toggle the search bar visibility
+                          });
+                        },
+                        child: Text(
+                          'Hazard',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        )),
+                  ),
+                  DropdownButton<String>(
+                    value: dropdownValueLocation,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    underline: Container(
+                      height: 5,
+                      width: 50,
+                    ),
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        dropdownValueLocation = value!;
+                        _runFilterLocation(value);
+                      });
+                    },
+                    items: listLocation
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
             ),
-          ),
+            if (_showSearchHazard)
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(80),
+                  shape: BoxShape.rectangle,
+                ),
+                child:  Autocomplete<String>(
+                  optionsBuilder: (TextEditingValue textEditingValue) {
+                    if (textEditingValue.text.isEmpty) {
+                      // If the text field is empty, return an empty list
+                      return Iterable<String>.empty();
+                    } else {
+                      // Filter suggestions based on the entered text
+                      return _suggestions.where((String item) {
+                        // Convert both the item and the entered text to lowercase for case-insensitive matching
+                        return item.toLowerCase().contains(textEditingValue.text.toLowerCase());
+                      });
+                    }
+                  },
+                  onSelected:  (String item) {
+                    // This function should handle what happens when an item is selected from the Autocomplete suggestions
+                    // Make sure it is correctly linked and triggers the necessary state changes or actions
+                    _runFilterHazard(item);
+                  },
+              ),
+              ),
+            if (_showSearchSubject)
+              Container(
+                alignment: AlignmentDirectional.topCenter,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: TextField(
+                  onChanged: (value) => _runFilterSubject(value),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      labelText: 'Search By Subject',
+                      suffixIcon: Icon(Icons.search)),
+                ),
+              ),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: _foundSubject?.length,
+                itemBuilder: (context, index) =>
+                    customListTile(_foundSubject![index], context),
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddSubject(),
+            ),
+          );
+        },
+        focusColor: Colors.lightBlue,
+        child: Icon(
+          Icons.add_circle_outlined,
+          size: 40,
+          color: Colors.black,
         ),
       ),
     );
@@ -522,14 +605,20 @@ class _EGMEState extends State<EGME> {
                 padding: EdgeInsets.only(right: 12.0),
                 decoration: BoxDecoration(
                   border: Border(
-                    right: BorderSide(width: 1.0, color: Colors.white24),
+                    left: BorderSide(
+                      style: BorderStyle.solid,
+                        width: 1.0,
+                        color: Colors.black),
                   ),
                 ),
-                child: Text(
-                  subject.Reg,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 3),
+                  child: Text(
+                    subject.Reg,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
@@ -537,6 +626,8 @@ class _EGMEState extends State<EGME> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                     subject.event,
                     style: TextStyle(
                       color: Colors.black,
@@ -545,7 +636,6 @@ class _EGMEState extends State<EGME> {
                   ),
                   Text(
                     subject.date,
-                    overflow: TextOverflow.fade,
                     style: TextStyle(
                       color: Colors.black,
                     ),
@@ -560,6 +650,8 @@ class _EGMEState extends State<EGME> {
                 ],
               ),
               subtitle: Text(
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 subject.hazard,
                 style: TextStyle(
                   color: Colors.black,
