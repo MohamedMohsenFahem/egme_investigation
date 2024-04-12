@@ -1,7 +1,8 @@
+import 'package:egme_investigation/screens/subject/add_subject.dart';
 import 'package:egme_investigation/screens/subject/subject.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../subject/Subject_model.dart';
-
 
 class AirCairo extends StatefulWidget {
   AirCairo({super.key});
@@ -9,17 +10,39 @@ class AirCairo extends StatefulWidget {
   @override
   State<AirCairo> createState() => _AirCairoState();
 }
+
 List<String> listReg = <String>[
-  'SU-BPU', 'SU-BPV', 'SU-BPW', 'SU-BPX', 'SU-BTM', 'SU-BUJ', 'SU-BUU',
-  'SU-BUV', 'SU-BVG', 'SU-BVH', 'SU-BVI', 'SU-BUK', 'SU-BUL', 'SU-BUM',
-  'SU-BUN', 'SU-BUP', 'SU-BUQ', 'SU-BUR', 'SU-BUS', 'SU-BUT', 'SU-BUX',
-  'SU-BUY', 'SU-BUZ', 'SU-BUJ', 'SU-BUK'
+  'SU-BPU',
+  'SU-BPV',
+  'SU-BPW',
+  'SU-BPX',
+  'SU-BTM',
+  'SU-BUJ',
+  'SU-BUU',
+  'SU-BUV',
+  'SU-BVG',
+  'SU-BVH',
+  'SU-BVI',
+  'SU-BUK',
+  'SU-BUL',
+  'SU-BUM',
+  'SU-BUN',
+  'SU-BUP',
+  'SU-BUQ',
+  'SU-BUR',
+  'SU-BUS',
+  'SU-BUT',
+  'SU-BUX',
+  'SU-BUY',
+  'SU-BUZ',
+  'SU-BUJ',
+  'SU-BUK'
 ];
 List<String> listLocation = <String>[
   'الكشف الأسبوعى',
-  'عودة رحلة شرم الشيخ وتجهيزها للإقلاع لرحلة جدة',
   'بهنجر 8000',
 ];
+
 class _AirCairoState extends State<AirCairo> {
   List<Subject_model>? subject = [
     Subject_model(
@@ -27,20 +50,22 @@ class _AirCairoState extends State<AirCairo> {
       event: 'عودة الطائرة من الجو بعد الطيران لظهور العيوب',
       hazard: '',
       location: 'out',
-       Rod_couse: 'من المرجح أن سبب الواقعة عدم تنفيذ إجراءات MEL 36-11-07B OPS PROC.  والخاص بـ'
-      '\nEng. # 2 Bleed & Eng. # 2 HP Valve طبقا للـ DFDR  والذى تم تحليله بواسطة Airbus  .'
-      '\n-  عدم الإكتشاف المبكر لوجودLoose   للـ Sense Line بين HPV & PRV  .',
-      recommendation: 'نشر الواقعة على السادة المهندسين بالصيانة اليومية / الدورية للتوعية بها.'
-      '\nمقترح خطاب للرد على شركة AirCairo.',
+      Rod_couse:
+          'من المرجح أن سبب الواقعة عدم تنفيذ إجراءات MEL 36-11-07B OPS PROC.  والخاص بـ'
+          '\nEng. # 2 Bleed & Eng. # 2 HP Valve طبقا للـ DFDR  والذى تم تحليله بواسطة Airbus  .'
+          '\n-  عدم الإكتشاف المبكر لوجودLoose   للـ Sense Line بين HPV & PRV  .',
+      recommendation:
+          'نشر الواقعة على السادة المهندسين بالصيانة اليومية / الدورية للتوعية بها.'
+          '\nمقترح خطاب للرد على شركة AirCairo.',
       Reg: 'BUN',
       risk_index: '',
-      summary: '•	الطائرة طرازA320Neo حروف تسجيل SU-BUN عند تنفيذ رحلتها المخططة القاهرة / جدة الرحلة رقم MSC459 بتاريخ 10/2/2024 عودة الطائرة من الجو بعد الطيران لظهور العيوب التالية بالطائرة: '
+      summary:
+          '•	الطائرة طرازA320Neo حروف تسجيل SU-BUN عند تنفيذ رحلتها المخططة القاهرة / جدة الرحلة رقم MSC459 بتاريخ 10/2/2024 عودة الطائرة من الجو بعد الطيران لظهور العيوب التالية بالطائرة: '
           '\n-	Eng. Bleed 1&2 Fault.'
           '\n-	Eng. # 2 HP Valve Fault.'
           '\n-	Bleed # 1 not Supplying in Flight.'
           '\nعلمًا بأن نفس الطائرة قد تم عودتها إلى الموقع بعد الدفع الخلفى لنفس الرحلة لوجود نفس العيب وقد تم إجراء تصحيحى بعمل Rest لكمبيوتر Bleed Monitoring Computer (BMC) 1&2.',
     ),
-
   ];
   List<Subject_model>? _foundSubject;
   bool _showSearchSubject = false;
@@ -151,7 +176,7 @@ class _AirCairoState extends State<AirCairo> {
     } else {
       results = subject
           ?.where((user) =>
-          user.hazard.toLowerCase().contains(enteredKeyword.toLowerCase()))
+              user.hazard.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
     setState(() {
@@ -166,7 +191,7 @@ class _AirCairoState extends State<AirCairo> {
     } else {
       results = subject
           ?.where((user) =>
-          user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
+              user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
     setState(() {
@@ -181,19 +206,21 @@ class _AirCairoState extends State<AirCairo> {
       } else {
         _foundSubject = subject
             ?.where((user) =>
-            user.Reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
+                user.Reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
             .toList();
       }
     });
   }
+
   void _runFilterLocation(String enteredKeyword) {
     setState(() {
       if (enteredKeyword.isEmpty) {
         _foundSubject = subject;
       } else {
         _foundSubject = subject
-            ?.where((user) =>
-            user.location.toLowerCase().contains(enteredKeyword.toLowerCase()))
+            ?.where((user) => user.location
+                .toLowerCase()
+                .contains(enteredKeyword.toLowerCase()))
             .toList();
       }
     });
@@ -209,93 +236,96 @@ class _AirCairoState extends State<AirCairo> {
           elevation: 0.1,
           backgroundColor: Colors.lightBlue[50],
           title: Text('Air Cairo'),
-          bottom: TabBar(tabs: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Date',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                DropdownButton<String>(
-                  value: dropdownValueReg,
-                  icon: const Icon(Icons.arrow_downward),
-                  elevation: 16,
-                  underline: Container(
-                    height: 5,
-                    width: 50,
-                  ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValueReg = value!;
-                      _runFilterReg(value);
-                    });
-                  },
-                  items: listReg.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _showSearchHazard = false;
-                        _showSearchSubject =
-                        !_showSearchSubject; // Toggle the search bar visibility
-                      });
-                    },
-                    child: Text(
-                      'Subject',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _showSearchSubject = false;
-                        _showSearchHazard =
-                        !_showSearchHazard; // Toggle the search bar visibility
-                      });
-                    },
-                    child: Text(
-                      'Hazard',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                DropdownButton<String>(
-                  value: dropdownValueLocation,
-                  icon: const Icon(Icons.arrow_downward),
-                  elevation: 16,
-                  underline: Container(
-                    height: 5,
-                    width: 50,
-                  ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValueLocation = value!;
-                      _runFilterLocation(value);
-                    });
-                  },
-                  items: listLocation.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ],
-            ),
-          ]),
         ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Date',
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
+                      DropdownButton<String>(
+                        value: dropdownValueReg,
+                        icon: const Icon(Icons.arrow_downward),
+                        elevation: 16,
+                        underline: Container(
+                          height: 5,
+                          width: 50,
+                        ),
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValueReg = value!;
+                            _runFilterReg(value);
+                          });
+                        },
+                        items: listReg
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _showSearchHazard = false;
+                              _showSearchSubject =
+                                  !_showSearchSubject; // Toggle the search bar visibility
+                            });
+                          },
+                          child: Text(
+                            'Subject',
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _showSearchSubject = false;
+                              _showSearchHazard =
+                                  !_showSearchHazard; // Toggle the search bar visibility
+                            });
+                          },
+                          child: Text(
+                            'Hazard',
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
+                      DropdownButton<String>(
+                        value: dropdownValueLocation,
+                        icon: const Icon(Icons.arrow_downward),
+                        elevation: 16,
+                        underline: Container(
+                          height: 5,
+                          width: 20,
+                        ),
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValueLocation = value!;
+                            _runFilterLocation(value);
+                          });
+                        },
+                        items: listLocation
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ),
                 if (_showSearchHazard)
                   Container(
                     decoration: BoxDecoration(
@@ -335,14 +365,23 @@ class _AirCairoState extends State<AirCairo> {
                   ),
                 Container(
                     child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _foundSubject?.length,
-                      itemBuilder: (context, index) =>
-                          customListTile(_foundSubject![index], context),
-                    )),
+                  shrinkWrap: true,
+                  itemCount: _foundSubject?.length,
+                  itemBuilder: (context, index) =>
+                      customListTile(_foundSubject![index], context),
+                )),
               ],
             ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  AddSubject()),
+            );
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );
@@ -371,7 +410,7 @@ class _AirCairoState extends State<AirCairo> {
             ),
             child: ListTile(
               contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               leading: Container(
                 padding: EdgeInsets.only(right: 12.0),
                 decoration: BoxDecoration(
@@ -440,4 +479,3 @@ class _AirCairoState extends State<AirCairo> {
     );
   }
 }
-

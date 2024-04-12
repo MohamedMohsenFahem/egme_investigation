@@ -1,3 +1,5 @@
+import 'package:egme_investigation/screens/egme/egme.dart';
+import 'package:egme_investigation/screens/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -27,7 +29,7 @@ class emge_investigation extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
         useMaterial3: true,
       ),
-      home:  SplashScreen(),
+      home:  HomeScreen(),
     );
   }
 }

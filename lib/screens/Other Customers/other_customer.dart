@@ -1,4 +1,6 @@
+import 'package:egme_investigation/screens/subject/add_subject.dart';
 import 'package:egme_investigation/screens/subject/subject.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../subject/Subject_model.dart';
 
@@ -17,7 +19,6 @@ List<String> listReg = <String>[
 ];
 List<String> listLocation = <String>[
   'الكشف الأسبوعى',
-  'عودة رحلة شرم الشيخ وتجهيزها للإقلاع لرحلة جدة',
   'بهنجر 8000',
 ];
 class _OtherCustomerState extends State<OtherCustomer> {
@@ -209,93 +210,94 @@ class _OtherCustomerState extends State<OtherCustomer> {
           elevation: 0.1,
           backgroundColor: Colors.lightBlue[50],
           title: Text('Other Customer'),
-          bottom: TabBar(tabs: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Date',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                DropdownButton<String>(
-                  value: dropdownValueReg,
-                  icon: const Icon(Icons.arrow_downward),
-                  elevation: 16,
-                  underline: Container(
-                    height: 5,
-                    width: 50,
-                  ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValueReg = value!;
-                      _runFilterReg(value);
-                    });
-                  },
-                  items: listReg.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _showSearchHazard = false;
-                        _showSearchSubject =
-                        !_showSearchSubject; // Toggle the search bar visibility
-                      });
-                    },
-                    child: Text(
-                      'Subject',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _showSearchSubject = false;
-                        _showSearchHazard =
-                        !_showSearchHazard; // Toggle the search bar visibility
-                      });
-                    },
-                    child: Text(
-                      'Hazard',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    )),
-                DropdownButton<String>(
-                  value: dropdownValueLocation,
-                  icon: const Icon(Icons.arrow_downward),
-                  elevation: 16,
-                  underline: Container(
-                    height: 5,
-                    width: 50,
-                  ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValueLocation = value!;
-                      _runFilterLocation(value);
-                    });
-                  },
-                  items: listLocation.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ],
-            ),
-          ]),
         ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Date',
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
+                      DropdownButton<String>(
+                        value: dropdownValueReg,
+                        icon: const Icon(Icons.arrow_downward),
+                        elevation: 16,
+                        underline: Container(
+                          height: 5,
+                          width: 20,
+                        ),
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValueReg = value!;
+                            _runFilterReg(value);
+                          });
+                        },
+                        items: listReg.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _showSearchHazard = false;
+                              _showSearchSubject =
+                              !_showSearchSubject; // Toggle the search bar visibility
+                            });
+                          },
+                          child: Text(
+                            'Subject',
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _showSearchSubject = false;
+                              _showSearchHazard =
+                              !_showSearchHazard; // Toggle the search bar visibility
+                            });
+                          },
+                          child: Text(
+                            'Hazard',
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
+                      DropdownButton<String>(
+                        value: dropdownValueLocation,
+                        icon: const Icon(Icons.arrow_downward),
+                        elevation: 16,
+                        underline: Container(
+                          height: 5,
+                          width: 20,
+                        ),
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValueLocation = value!;
+                            _runFilterLocation(value);
+                          });
+                        },
+                        items: listLocation.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ),
                 if (_showSearchHazard)
                   Container(
                     decoration: BoxDecoration(
@@ -343,6 +345,15 @@ class _OtherCustomerState extends State<OtherCustomer> {
               ],
             ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  AddSubject()),
+            );
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );

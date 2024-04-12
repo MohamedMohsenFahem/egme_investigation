@@ -3,12 +3,37 @@ import 'package:egme_investigation/screens/Subject/Subject_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-List<String> listReg = <String>['Air Cairo Reg',
-  'SU-BPU', 'SU-BPV', 'SU-BPW', 'SU-BPX', 'SU-BTM', 'SU-BUJ', 'SU-BUU',
-  'SU-BUV', 'SU-BVG', 'SU-BVH', 'SU-BVI', 'SU-BUK', 'SU-BUL', 'SU-BUM',
-  'SU-BUN', 'SU-BUP', 'SU-BUQ', 'SU-BUR', 'SU-BUS', 'SU-BUT', 'SU-BUX',
-  'SU-BUY', 'SU-BUZ', 'SU-BUJ', 'SU-BUK', 'EGME Reg',
-  'SU-GDL', 'SU-GDM',
+
+List<String> listReg = <String>[
+  'Air Cairo Reg',
+  'SU-BPU',
+  'SU-BPV',
+  'SU-BPW',
+  'SU-BPX',
+  'SU-BTM',
+  'SU-BUJ',
+  'SU-BUU',
+  'SU-BUV',
+  'SU-BVG',
+  'SU-BVH',
+  'SU-BVI',
+  'SU-BUK',
+  'SU-BUL',
+  'SU-BUM',
+  'SU-BUN',
+  'SU-BUP',
+  'SU-BUQ',
+  'SU-BUR',
+  'SU-BUS',
+  'SU-BUT',
+  'SU-BUX',
+  'SU-BUY',
+  'SU-BUZ',
+  'SU-BUJ',
+  'SU-BUK',
+  'EGME Reg',
+  'SU-GDL',
+  'SU-GDM',
   'SU-GDN',
   'SU-GDO',
   'SU-GDP',
@@ -140,7 +165,8 @@ class _AddSubjectState extends State<AddSubject> {
   TextEditingController _HazardController = TextEditingController();
   final TextEditingController _riskIndexController = TextEditingController();
   final TextEditingController _rodCauseController = TextEditingController();
-  final TextEditingController _recomendationController = TextEditingController();
+  final TextEditingController _recomendationController =
+      TextEditingController();
   final _db = FirebaseFirestore.instance;
   bool _loading = false;
   bool _error = false;
@@ -150,6 +176,9 @@ class _AddSubjectState extends State<AddSubject> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue[50],
+      ),
       backgroundColor: Colors.lightBlue[50],
       body: Container(
         alignment: Alignment.center,
@@ -164,8 +193,7 @@ class _AddSubjectState extends State<AddSubject> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.title_outlined),
                   hintText: 'Enter Event',
-                  labelText: 'Event'
-              ),
+                  labelText: 'Event'),
             ),
             const SizedBox(height: 20),
             TextField(
@@ -175,18 +203,16 @@ class _AddSubjectState extends State<AddSubject> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.title_outlined),
                   hintText: 'Enter summary',
-                  labelText: 'Summary'
-              ),
+                  labelText: 'Summary'),
             ),
             const SizedBox(height: 20),
             Container(
               width: double.infinity,
-              decoration: BoxDecoration(
-                  border: Border.all()
-              ),
+              decoration: BoxDecoration(border: Border.all()),
               child: Column(
                 children: [
-                  Text('Reg',
+                  Text(
+                    'Reg',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -194,16 +220,14 @@ class _AddSubjectState extends State<AddSubject> {
                   Container(
                     alignment: AlignmentDirectional.center,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                        border: Border.all()
-                    ),
+                    decoration: BoxDecoration(border: Border.all()),
                     child: DropdownButton<String>(
                       value: dropdownValueReg,
                       icon: const Icon(Icons.arrow_downward),
                       elevation: 16,
                       underline: Container(
                         height: 5,
-                        width: 50,
+                        width: 20,
                       ),
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
@@ -213,7 +237,7 @@ class _AddSubjectState extends State<AddSubject> {
                         });
                       },
                       items:
-                      listReg.map<DropdownMenuItem<String>>((String value) {
+                          listReg.map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -231,18 +255,16 @@ class _AddSubjectState extends State<AddSubject> {
               elevation: 16,
               underline: Container(
                 height: 5,
-                width: 50,
+                width: 20,
               ),
               onChanged: (String? value) {
                 // This is called when the user selects an item.
                 setState(() {
                   dropdownValueLocation = value!;
                   _locationController = value as TextEditingController;
-
                 });
               },
-              items: listLocation
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: listLocation.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -329,37 +351,41 @@ class _AddSubjectState extends State<AddSubject> {
                   summary: _summaryController.text.trim(),
                   hazard: _HazardController.text.trim(),
                   location: _locationController.text.trim(),
-                  recommendation:_recomendationController.text.trim(),
+                  recommendation: _recomendationController.text.trim(),
                   risk_index: _riskIndexController.text.trim(),
                   Rod_couse: _rodCauseController.text.trim(),
                 );
                 try {
-                  await _db
-                      .collection('Subject').add(Subject.toJson());
+                  await _db.collection('Subject').add(Subject.toJson());
                   Get.snackbar('Success', 'Subject has been added',
                       snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor:Colors.white,
+                      backgroundColor: Colors.white,
                       colorText: Colors.black);
-                } catch(error , stackTrace){
-                  Get.snackbar("error","something went wrong",
+                } catch (error, stackTrace) {
+                  Get.snackbar(
+                    "error",
+                    "something went wrong",
                     snackPosition: SnackPosition.BOTTOM,
-                    backgroundColor:Colors.white,
+                    backgroundColor: Colors.white,
                     colorText: Colors.black,
                   );
-                };
+                }
+                ;
               },
               style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(const Size(300, 10)),
+                  minimumSize: MaterialStateProperty.all(const Size(250, 10)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          side: const BorderSide(color: Colors.black12)))),
-              child: const Text(
-                'Add Subject',
-                style: TextStyle(
+                          borderRadius: BorderRadius.circular(20),
+                          side: const BorderSide(color: Colors.deepPurple)))),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: const Text(
+                  'Add Subject',
+                  style: TextStyle(
                     color: Color(0xFF0d47A1),
-                    fontSize: 30,
-                    fontFamily: 'Cairo'
+                    fontSize: 25,
+                  ),
                 ),
               ),
             ),
