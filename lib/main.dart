@@ -27,7 +27,7 @@ class emge_investigation extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home:  SplashScreen(),
     );
   }
 }

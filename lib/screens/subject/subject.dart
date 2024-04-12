@@ -1,5 +1,7 @@
-import 'package:egme_investigation/screens/egme/model_egma.dart';
+import 'package:egme_investigation/screens/subject/Subject_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Subject extends StatelessWidget {
   late final Subject_model subject_items ;
@@ -97,94 +99,94 @@ class Subject extends StatelessWidget {
                   height: 16.0,
                 ),
                 Row(
-
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF68BADB),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Rod Cause',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        padding: EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF68BADB),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          height: 80,
+                        child: Container(
                           alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color:  Color(0xFFAFE1F5),
-                          ),
                           child: Text(
-                            subject_items.Rod_couse,
-                            softWrap: true,
+                            'Risk index',
                             style: TextStyle(
-                              fontSize: 20.0,
-                            ),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
-                      ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        height: 80,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color:  Color(0xFFAFE1F5),
+                        ),
+                        child: Text(
+                          subject_items.risk_index,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       width: 10.0,
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF68BADB),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Hazard',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        padding: EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF68BADB),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Container(
-                          height: 80,
+                        child: Container(
                           alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color:  Color(0xFFAFE1F5),
-                          ),
                           child: Text(
-                            subject_items.hazard,
-                            softWrap: true,
+                            'Hazard',
                             style: TextStyle(
-                              fontSize: 20.0,
-                            ),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color:  Color(0xFFAFE1F5),
+                        ),
+                        child: Text(
+                          subject_items.hazard,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
 
-                SizedBox(
-                  height: 15.0,
+                  ],
                 ),
                 Container(
                   padding: EdgeInsets.all(6.0),
@@ -195,7 +197,7 @@ class Subject extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.center,
                     child: Text(
-                      'Risk index',
+                      'Rod Cause',
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -207,54 +209,16 @@ class Subject extends StatelessWidget {
                   height: 15.0,
                 ),
                 Container(
-                  height: 80,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.0),
                     color:  Color(0xFFAFE1F5),
                   ),
                   child: Text(
-                    subject_items.risk_index,
+                    subject_items.Rod_couse,
                     softWrap: true,
                     style: TextStyle(
                       fontSize: 20.0,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                Container(
-                  padding: EdgeInsets.all(6.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF68BADB),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Reason',
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    color:  Color(0xFFAFE1F5),
-                  ),
-                  child: Text(
-                    subject_items.reason,
-                    softWrap: true,
-                    style: TextStyle(
-                      fontSize: 15.0,
                     ),
                   ),
                 ),
