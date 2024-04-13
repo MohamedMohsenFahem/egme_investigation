@@ -167,7 +167,7 @@ class _AddSubjectEGMEState extends State<AddSubjectEGME> {
                   Rod_couse: _rodCauseController.text.trim(),
                 );
                 try {
-                  await _db.collection('SubjectEGMA').add(Subject.toJson());
+                  await _db.collection('SubjectEGME').add(Subject.toJson());
                   Get.snackbar('Success', 'Subject has been added',
                       snackPosition: SnackPosition.BOTTOM,
                       backgroundColor: Colors.white,
