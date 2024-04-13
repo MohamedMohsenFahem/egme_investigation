@@ -7,7 +7,6 @@ class Subject_model {
   final String Rod_couse;
   final String hazard;
   final String risk_index;
-  final String reason;
   final String location;
   final String recommendation;
 
@@ -18,7 +17,6 @@ class Subject_model {
     required this.summary,
     required this.hazard,
     required this.location,
-    required this.reason,
     required this.recommendation,
     required this.risk_index,
     required this.Rod_couse
@@ -29,4 +27,18 @@ class Subject_model {
     hazard,
     summary
   ];
+  Map<String, dynamic> toJson() {
+    return {
+      'Event': event,
+      'date': date,
+      'Reg': Reg,
+      'summary': summary,
+      'Rod_couse': Rod_couse,
+      'hazard': hazard,
+      'risk_index': risk_index,
+      'location': location,
+      'recommendation': recommendation,
+    };
+  }
+
 }

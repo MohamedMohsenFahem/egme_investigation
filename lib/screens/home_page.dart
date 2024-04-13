@@ -1,6 +1,7 @@
+
 import 'package:egme_investigation/screens/AirCairo/air_cairo.dart';
 import 'package:egme_investigation/screens/Other%20Customers/other_customer.dart';
-import 'package:egme_investigation/screens/egme/egma.dart';
+import 'package:egme_investigation/screens/egme/egme.dart';
 import 'package:egme_investigation/screens/login_regest_forget/optionsLogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -58,12 +59,12 @@ class HomeScreen extends StatelessWidget {
             height: 22,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12),
                   color: Colors.blue.shade600),
-              width: 500,
+              width: 350,
               child: TextButton(
                 child: Text(
                   'EGME',
@@ -82,15 +83,15 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 22,
+            height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12),
                   color: Colors.blue.shade600),
-              width: 500,
+              width: 350,
               child: TextButton(
                 child: Text(
                   'Air Cairo',
@@ -102,22 +103,22 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  AirCairo()),
+                    MaterialPageRoute(builder: (context) => AirCairo()),
                   );
                 },
               ),
             ),
           ),
           SizedBox(
-            height: 22,
+            height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12),
                   color: Colors.blue.shade600),
-              width: 500,
+              width: 350,
               child: TextButton(
                 child: Text(
                   'Other Customers',
@@ -125,14 +126,13 @@ class HomeScreen extends StatelessWidget {
                 ),
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                   ),
                 ),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>  Other_Customer()),
+                    MaterialPageRoute(builder: (context) => OtherCustomer()),
                   );
                 },
               ),
