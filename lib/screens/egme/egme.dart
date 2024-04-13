@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:egme_investigation/screens/egme/Items.dart';
 import 'package:egme_investigation/screens/subject/Subject_model.dart';
-import 'package:egme_investigation/screens/subject/add_subject.dart';
+import 'package:egme_investigation/screens/egme/add_subjectEGME.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -109,90 +110,32 @@ List<String> listReg = <String>[
 ];
 //drob2
 List<String> listLocation = <String>[
-  'الكشف الأسبوعى',
-  'بهنجر 8000',
+  'Line shifts',
+  ' Weeky check',
+  'Tech.support',
+  'Line jcc',
+  ' Mcc',
+  'Bm H6000',
+  'BM H7000',
+  'BM H8000',
+  'ENGINE SHOP',
+  'MECH.SHOP',
+  'ELECT .SHOP',
+  ' BRAKE. SHOP',
+  'IERA SHOPS',
+  'Atic shop',
+  'Stores',
+  'Incoming inspection',
+  'Logistics',
+  'Repair and warranty',
+  'Came',
+  'Tech.services',
+  'Safety',
+  'Quality',
 ];
 
 class _EGMEState extends State<EGME> {
-  List<Subject_model>? subject = [
-    Subject_model(
-      date: '6/1/2024',
-      event:
-          'إكتشاف تآكل فى Damage in Eng. #2 Outboard Heat Shield of C-Duct  ',
-      hazard: 'Maintenance Activity Error (Installation Error)   ',
-      location: 'الكشف الأسبوعى ',
-      recommendation:
-          '1-نشر الواقعة على السادة المهندسين / الفنيين بالصيانة اليومية / الدورية للتوعية بها.'
-          '\n2--	التنبية على السادة المهندسين / الفنيين بالتفتيش الجيد على المحرك وكذلك الأجزاء التى يتم فكها عند تغيير Fuel Nozzle لتفادى تكرار مثل هذه الواقعة مستقبلا.'
-          '\n3--	الصيانة اليومية الإلتزام على ما جاء فىLPM  من متابعة العيوب فى أول رحلة بعد أى كشف من الهنجر.'
-          '\nLPM-LM-Ramp-05 A/C Acceptance between BM & LM'
-          '\n4-دراسة إدراج الـTask of Removal & Installation of Full Set of Main Fuel Nozzle على أنهRII Task  ',
-      Reg: 'SU-GFL',
-      risk_index: '3C',
-      Rod_couse:
-          'من المرجح بأن سبب الواقعة يرجع نتيجة عدم الربط الجيد للـ  Unionخاص بماسورة Sensing Line Air المتصل بصمام PRV مما أدى إلى حدوث خروج هواء ساخن من خلالها أدى إلى تآكل الطبقة العازلة لــ C-duct  R-Sleeveالمحرك رقم (2) ـ ',
-      summary:
-          'عند تنفيذ W.O (Eng. #2 HPTACC Inspection) الخاص بتغيير Eng. #2 Fuel Nozzle فى الكشف الأسبوعى للطائرة إكتشف مهندس الطائرة عن وجود تآكل فىDamage in Eng. #2 R.H.S Outboard Heat Shield of C-Duct وبالتالى قام بتحرير تقرير البلاغ رقم (Occ. # 2110).',
-    ),
-    Subject_model(
-      date: '3/2/2024',
-      event: 'MLG Wheel #2 Low Pressure',
-      hazard: 'Maintenance Data Not Followed',
-      location: 'عودة رحلة شرم الشيخ وتجهيزها للإقلاع لرحلة جدة ',
-      recommendation: '1.	MOE 2-16 Release to Service Procedure'
-          '\n2.	line maintenance check (Transit/Pre-flight)'
-          '\n3.	AMM Task Card 12-15-51/301'
-          '\n4.	AMM Task Card 32-45-00/601',
-      Reg: 'SU-GEL',
-      risk_index: '3D',
-      Rod_couse:
-          '1.	يتضح مما سبق من الأقوال والتحليل بأن هناك خطأ صادر من المهندس بتوقيع صلاحية للطائرة دون التأكد والكشف على ضغط العجلة نتيجة إستعجال منه .'
-          ' \n2.	هناك تقصير من المهندس فى تنفيذ بنود Transit/Pre-flight.',
-      summary:
-          '\n1-	بخصوص التقرير التطوعى الوارد إلى الإدارة العامة لسلامة الصيانة رقم (AMOS # 2120) عن الطائرة طراز '
-          '\nB737-800 حروف تسجيل SU-GEL عودة رحلة شرم الشيخ وتجهيزها للإقلاع لرحلة جدة بتاريخ 3/2/2024.',
-    ),
-    Subject_model(
-      date: '20/2/2024 ',
-      event: 'Eng. No.2 T/R Deactivation',
-      hazard: 'Workplace distractions / interruptions during task performance ',
-      location: 'in',
-      recommendation:
-          'إتخاذ اللازم نحو التنبيه على السادة مديرى النوبات بضرورة مراعاة الـ Work Load لمهندسى النوبة عند العمل على رفع العيوب المؤجلة وأعمال النوبة الأخرى.',
-      Reg: 'SU-GEA',
-      risk_index: '1D',
-      Rod_couse:
-          '1.	عدم التركيز والتشتت أثناء تنفيذ الـ  Taskكونه كان موزع على رفع العيب المؤجل بالإضافة إلى طائرات أخرى فى نفس التوقيت وفى نهاية النوبة الليلية.'
-          '\n-	Workplace Distractions / Interruptions During Task Performance',
-      summary:
-          'بخصوص تكليف سيادتكم بالتحقيق فى واقعة الطائرة طراز B737-800 حروف تسجيل SU-GEL عن عدم تحرى الدقة أثناء تنفيذ Task Eng. No. 2 T/R Deactivation بتاريخ 20/02/2024.',
-    ),
-    Subject_model(
-      date: '7/2/2024',
-      event:
-          'During A/C Jigging Damage Occurred to Aft Fuselage Safety Stay Area',
-      hazard: 'Tools/Equipment/Used Improperly',
-      location: 'بهنجر 8000',
-      Rod_couse:
-          '1.	قيام طاقم الفنيين بتقريب الـ Safety Jack إلى جسم الطائرة على الرغم من أن Safety Jack أخر مرحلة لتأمين الطائرة.'
-          '\n2.	عدم وجود إشراف من المهندس المسئول أو رئيس مجموعة الفنيين أثناء عملية الرفع وعدم الإنتباه إلى الوضع لخاطئ للـ Safety Jack أسفل الطائرة بسبب إنشغالهم فقط في مراقبة الموازين في منطقة الـ Wheel Well وساعد على ذلك قلة خبرة المهندس وعدم إستخدام الـ ADIRS بضبط الطائرة أثناء عملية الرفع.'
-          '\n3.	مخالفة الـ AMM الخاص برفع الطائرة وإستخدام Tools غير منصوص عليها فى الـ AMM وإستخدام Protractor Digital بدلاً من Spirit Level. (Maintenance Data Not Followed)'
-          '\n4.	أعتاد الفنيين والمهندسين بالهنجر إستخدامProtractor   Digitalبدلاً من Spirit Le29.1.2024vel بالمخالفة الصريحة للـ AMM وهذا يصنف Routine Violation',
-      recommendation:
-          '•	عمل توعية للسادة المهندسين ورؤساء مجموعة العربة السفلى والفنيين للإنتباه إلى خطورة وضع الـ Safety Jack أسفل الطائرة قبل وأثناء عملية رفع الطائرة وضرورة إبعاده تمامًا وعدم إستخدامه إلا بعد تمام عملية الرفع.'
-          '\n•	عمل توعية Awareness للسادة مديرى الهناجر عند توزيع المهندسين على الطائرة عامل الخبرة فى Tasks التى تحتاج إلى الخبرة أثناء التنفيذ.'
-          '\n•	التنبيه المشدد على السادة المهندسين بعدم إستخدامDigital Protractor بديلا عن Spirit Leve .'
-          '\n•	التنسيق مع الإدارة العامة للعدد والآلات بسرعة تموين Spirit Level'
-          '\n•	دراسة وضع الكارت RII A/C Jacking للمهندسين لأهمية خطورة هذا الكارتRISK 2B'
-          '\n•	التنسيق مع مدير عام الصيانات الدورية يسرعة تموين مخزن العدة بهنجر 8000(T05)  بالـ Spirit Level P/N'
-          '\n•	لإدراج A/C Jacking RII ودراسة تحديث الـ 223 List.'
-          '\n•	إصدار Safety Bulletin بإستخدام Spirit Level وعدم إستخدام Protractor Digital بديلاً كما جاء فىAMM ومراسلة .Airbus',
-      Reg: 'SU-GDV',
-      risk_index: '2B',
-      summary:
-          'بخصوص حدوث During A/C Jigging Damage Occurred to Aft Fuselage Safety Stay Area على الطائرة طراز A330-300 حروف تسجيل SU-GDV بتاريخ 7/2/2024 بهنجر 8000 .',
-    ),
-  ];
+  List<Subject_model>? subjects = [];
   List<Subject_model>? _foundSubject;
   bool _showSearchSubject = false;
   bool _showSearchHazard = false;
@@ -289,18 +232,22 @@ class _EGMEState extends State<EGME> {
   ];
   String dropdownValueReg = listReg.first;
   String dropdownValueLocation = listLocation.first;
+  CollectionReference _db = FirebaseFirestore.instance.collection('SubjectEGME');
+  late Stream<QuerySnapshot> _dbSubject;
   @override
   void initState() {
-    _foundSubject = subject;
     super.initState();
+    _foundSubject = subjects;
+    _dbSubject = _db.snapshots();
+    _fetchData();
   }
 
   void _runFilterHazard(String enteredKeyword) {
     List<Subject_model>? results = [];
     if (enteredKeyword.isEmpty) {
-      results = subject;
+      results = subjects;
     } else {
-      results = subject
+      results = subjects
           ?.where((user) =>
               user.hazard.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -313,9 +260,9 @@ class _EGMEState extends State<EGME> {
   void _runFilterSubject(String enteredKeyword) {
     List<Subject_model>? results = [];
     if (enteredKeyword.isEmpty) {
-      results = subject;
+      results = subjects;
     } else {
-      results = subject
+      results = subjects
           ?.where((user) =>
               user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -328,9 +275,9 @@ class _EGMEState extends State<EGME> {
   void _runFilterReg(String enteredKeyword) {
     setState(() {
       if (enteredKeyword.isEmpty) {
-        _foundSubject = subject;
+        _foundSubject = subjects;
       } else {
-        _foundSubject = subject
+        _foundSubject = subjects
             ?.where((user) =>
                 user.Reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
             .toList();
@@ -340,14 +287,39 @@ class _EGMEState extends State<EGME> {
 
   void _runFilterLocation(String enteredKeyword) {
     setState(() {
-      _foundSubject = subject
+      _foundSubject = subjects
           ?.where((user) => user.location
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
           .toList();
     });
   }
+  void _fetchData() async {
+    try {
+      QuerySnapshot querySnapshot = await _db.get();
+      List<Subject_model> fetchedSubjects = querySnapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        return Subject_model(
+          event: data['Event'],
+          Reg: data['Reg'],
+          date: data['Date'],
+          summary: data['Summary'],
+          hazard: data['Hazard'],
+          location: data['Location'],
+          recommendation: data['Recommendation'],
+          risk_index: data['Risk_index'],
+          Rod_couse: data['Rod_couse'],
+        );
+      }).toList();
 
+      setState(() {
+        subjects = fetchedSubjects;
+        _foundSubject = subjects;
+      });
+    } catch (e) {
+      print("Error fetching data: $e");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -484,12 +456,43 @@ class _EGMEState extends State<EGME> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _foundSubject!.length,
-                      itemBuilder: (context, index) =>
-                          customListTile(_foundSubject![index], context),
-                    )),
+                  child: StreamBuilder<QuerySnapshot>(
+                      stream: _dbSubject,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return Center(child: Text(snapshot.error.toString()));
+                        }
+
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+
+                        List<Subject_model> subjectsList = snapshot.data!.docs.map((doc) {
+                          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+                          return Subject_model(
+                            event: data['Event'] ?? '', // Provide default value if 'Event' is null
+                            Reg: data['Reg'] ?? '', // Provide default value if 'Reg' is null
+                            date: data['Date'] ?? '', // Provide default value if 'Date' is null
+                            summary: data['Summary'] ?? '', // Provide default value if 'Summary' is null
+                            hazard: data['Hazard'] ?? '', // Provide default value if 'Hazard' is null
+                            location: data['Location'] ?? '', // Provide default value if 'Location' is null
+                            recommendation: data['Recommendation'] ?? '', // Provide default value if 'Recommendation' is null
+                            risk_index: data['Risk_index'] ?? '', // Provide default value if 'Risk_index' is null
+                            Rod_couse: data['Rod_couse'] ?? '', // Provide default value if 'Rod_couse' is null
+                          );
+                        }).toList();
+
+
+                        return ListView.builder(
+                          itemCount: _foundSubject!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            // Pass each Subject_model object to customListTile
+                            return customListTile(_foundSubject![index], context);
+                          },
+                        );
+                      }),
+                ),
               ),
             ),
           ],
@@ -499,7 +502,7 @@ class _EGMEState extends State<EGME> {
           onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) =>  AddSubject()),
+              MaterialPageRoute(builder: (context) =>  AddSubjectEGME()),
             );
           },
           child: Icon(Icons.add),

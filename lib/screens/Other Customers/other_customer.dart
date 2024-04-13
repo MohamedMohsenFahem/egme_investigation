@@ -1,6 +1,6 @@
-import 'package:egme_investigation/screens/subject/add_subject.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:egme_investigation/screens/Other%20Customers/add_subjectOther.dart';
 import 'package:egme_investigation/screens/subject/subject.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../subject/Subject_model.dart';
 
@@ -18,31 +18,31 @@ List<String> listReg = <String>[
   'SU-BUY', 'SU-BUZ', 'SU-BUJ', 'SU-BUK'
 ];
 List<String> listLocation = <String>[
-  'الكشف الأسبوعى',
-  'بهنجر 8000',
+  'Line shifts',
+  ' Weeky check',
+  'Tech.support',
+  'Line jcc',
+  ' Mcc',
+  'Bm H6000',
+  'BM H7000',
+  'BM H8000',
+  'ENGINE SHOP',
+  'MECH.SHOP',
+  'ELECT .SHOP',
+  ' BRAKE. SHOP',
+  'IERA SHOPS',
+  'Atic shop',
+  'Stores',
+  'Incoming inspection',
+  'Logistics',
+  'Repair and warranty',
+  'Came',
+  'Tech.services',
+  'Safety',
+  'Quality',
 ];
 class _OtherCustomerState extends State<OtherCustomer> {
-  List<Subject_model>? subject = [
-    Subject_model(
-      date: '10/2/2024',
-      event: 'عودة الطائرة من الجو بعد الطيران لظهور العيوب',
-      hazard: '',
-      location: 'out',
-      Rod_couse: 'من المرجح أن سبب الواقعة عدم تنفيذ إجراءات MEL 36-11-07B OPS PROC.  والخاص بـ'
-          '\nEng. # 2 Bleed & Eng. # 2 HP Valve طبقا للـ DFDR  والذى تم تحليله بواسطة Airbus  .'
-          '\n-  عدم الإكتشاف المبكر لوجودLoose   للـ Sense Line بين HPV & PRV  .',
-      recommendation: 'نشر الواقعة على السادة المهندسين بالصيانة اليومية / الدورية للتوعية بها.'
-          '\nمقترح خطاب للرد على شركة AirCairo.',
-      Reg: 'BUN',
-      risk_index: '',
-      summary: '•	الطائرة طرازA320Neo حروف تسجيل SU-BUN عند تنفيذ رحلتها المخططة القاهرة / جدة الرحلة رقم MSC459 بتاريخ 10/2/2024 عودة الطائرة من الجو بعد الطيران لظهور العيوب التالية بالطائرة: '
-          '\n-	Eng. Bleed 1&2 Fault.'
-          '\n-	Eng. # 2 HP Valve Fault.'
-          '\n-	Bleed # 1 not Supplying in Flight.'
-          '\nعلمًا بأن نفس الطائرة قد تم عودتها إلى الموقع بعد الدفع الخلفى لنفس الرحلة لوجود نفس العيب وقد تم إجراء تصحيحى بعمل Rest لكمبيوتر Bleed Monitoring Computer (BMC) 1&2.',
-    ),
-
-  ];
+  List<Subject_model>? subjects = [];
   List<Subject_model>? _foundSubject;
   bool _showSearchSubject = false;
   bool _showSearchHazard = false;
@@ -139,18 +139,22 @@ class _OtherCustomerState extends State<OtherCustomer> {
   ];
   String dropdownValueReg = listReg.first;
   String dropdownValueLocation = listLocation.first;
+  CollectionReference _db = FirebaseFirestore.instance.collection('SubjectOther');
+  late Stream<QuerySnapshot> _dbSubject;
   @override
   void initState() {
-    _foundSubject = subject;
     super.initState();
+    _foundSubject = subjects;
+    _dbSubject = _db.snapshots();
+    _fetchData();
   }
 
   void _runFilterHazard(String enteredKeyword) {
     List<Subject_model>? results = [];
     if (enteredKeyword.isEmpty) {
-      results = subject;
+      results = subjects;
     } else {
-      results = subject
+      results = subjects
           ?.where((user) =>
           user.hazard.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -163,9 +167,9 @@ class _OtherCustomerState extends State<OtherCustomer> {
   void _runFilterSubject(String enteredKeyword) {
     List<Subject_model>? results = [];
     if (enteredKeyword.isEmpty) {
-      results = subject;
+      results = subjects;
     } else {
-      results = subject
+      results = subjects
           ?.where((user) =>
           user.event.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -178,9 +182,9 @@ class _OtherCustomerState extends State<OtherCustomer> {
   void _runFilterReg(String enteredKeyword) {
     setState(() {
       if (enteredKeyword.isEmpty) {
-        _foundSubject = subject;
+        _foundSubject = subjects;
       } else {
-        _foundSubject = subject
+        _foundSubject = subjects
             ?.where((user) =>
             user.Reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
             .toList();
@@ -190,171 +194,225 @@ class _OtherCustomerState extends State<OtherCustomer> {
   void _runFilterLocation(String enteredKeyword) {
     setState(() {
       if (enteredKeyword.isEmpty) {
-        _foundSubject = subject;
+        _foundSubject = subjects;
       } else {
-        _foundSubject = subject
+        _foundSubject = subjects
             ?.where((user) =>
             user.location.toLowerCase().contains(enteredKeyword.toLowerCase()))
             .toList();
       }
     });
   }
+  void _fetchData() async {
+    try {
+      QuerySnapshot querySnapshot = await _db.get();
+      List<Subject_model> fetchedSubjects = querySnapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        return Subject_model(
+          event: data['Event'],
+          Reg: data['Reg'],
+          date: data['Date'],
+          summary: data['Summary'],
+          hazard: data['Hazard'],
+          location: data['Location'],
+          recommendation: data['Recommendation'],
+          risk_index: data['Risk_index'],
+          Rod_couse: data['Rod_couse'],
+        );
+      }).toList();
 
+      setState(() {
+        subjects = fetchedSubjects;
+        _foundSubject = subjects;
+      });
+    } catch (e) {
+      print("Error fetching data: $e");
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 5,
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.lightBlue[50],
+      appBar: AppBar(
+        elevation: 0.1,
         backgroundColor: Colors.lightBlue[50],
-        appBar: AppBar(
-          elevation: 0.1,
-          backgroundColor: Colors.lightBlue[50],
-          title: Text('Other Customer'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Date',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          )),
-                      DropdownButton<String>(
-                        value: dropdownValueReg,
-                        icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
-                        underline: Container(
-                          height: 5,
-                          width: 20,
-                        ),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValueReg = value!;
-                            _runFilterReg(value);
-                          });
-                        },
-                        items: listReg.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _showSearchHazard = false;
-                              _showSearchSubject =
-                              !_showSearchSubject; // Toggle the search bar visibility
-                            });
-                          },
-                          child: Text(
-                            'Subject',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          )),
-                      TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _showSearchSubject = false;
-                              _showSearchHazard =
-                              !_showSearchHazard; // Toggle the search bar visibility
-                            });
-                          },
-                          child: Text(
-                            'Hazard',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          )),
-                      DropdownButton<String>(
-                        value: dropdownValueLocation,
-                        icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
-                        underline: Container(
-                          height: 5,
-                          width: 20,
-                        ),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValueLocation = value!;
-                            _runFilterLocation(value);
-                          });
-                        },
-                        items: listLocation.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                ),
-                if (_showSearchHazard)
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(80),
-                      shape: BoxShape.rectangle,
+        title: Text('Other Customer'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Date',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
+                  DropdownButton<String>(
+                    value: dropdownValueReg,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    underline: Container(
+                      height: 5,
+                      width: 20,
                     ),
-                    child: Autocomplete<String>(
-                      optionsBuilder: (TextEditingValue textEditingValue) {
-                        if (textEditingValue.text == '') {
-                          return Iterable<String>.empty();
-                        }
-                        return _suggestions.where((String item) {
-                          return item
-                              .contains(textEditingValue.text.toLowerCase());
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        dropdownValueReg = value!;
+                        _runFilterReg(value);
+                      });
+                    },
+                    items: listReg.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _showSearchHazard = false;
+                          _showSearchSubject =
+                          !_showSearchSubject; // Toggle the search bar visibility
                         });
                       },
-                      onSelected: (String item) {
-                        _runFilterHazard(item);
+                      child: Text(
+                        'Subject',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _showSearchSubject = false;
+                          _showSearchHazard =
+                          !_showSearchHazard; // Toggle the search bar visibility
+                        });
                       },
+                      child: Text(
+                        'Hazard',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
+                  DropdownButton<String>(
+                    value: dropdownValueLocation,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    underline: Container(
+                      height: 5,
+                      width: 20,
                     ),
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        dropdownValueLocation = value!;
+                        _runFilterLocation(value);
+                      });
+                    },
+                    items: listLocation.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
-                if (_showSearchSubject)
-                  Container(
-                    alignment: AlignmentDirectional.topCenter,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: TextField(
-                      onChanged: (value) => _runFilterSubject(value),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          labelText: 'Search By Subject',
-                          suffixIcon: Icon(Icons.search)),
-                    ),
-                  ),
-                Container(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _foundSubject?.length,
-                      itemBuilder: (context, index) =>
-                          customListTile(_foundSubject![index], context),
-                    )),
-              ],
+                ],
+              ),
             ),
-          ),
+            if (_showSearchHazard)
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(80),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Autocomplete<String>(
+                  optionsBuilder: (TextEditingValue textEditingValue) {
+                    if (textEditingValue.text == '') {
+                      return Iterable<String>.empty();
+                    }
+                    return _suggestions.where((String item) {
+                      return item
+                          .contains(textEditingValue.text.toLowerCase());
+                    });
+                  },
+                  onSelected: (String item) {
+                    _runFilterHazard(item);
+                  },
+                ),
+              ),
+            if (_showSearchSubject)
+              Container(
+                alignment: AlignmentDirectional.topCenter,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: TextField(
+                  onChanged: (value) => _runFilterSubject(value),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      labelText: 'Search By Subject',
+                      suffixIcon: Icon(Icons.search)),
+                ),
+              ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  child: StreamBuilder<QuerySnapshot>(
+                      stream: _dbSubject,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return Center(child: Text(snapshot.error.toString()));
+                        }
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+
+                        List<Subject_model> subjectsList = snapshot.data!.docs.map((doc) {
+                          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+                          return Subject_model(
+                            event: data['Event'] ?? '', // Provide default value if 'Event' is null
+                            Reg: data['Reg'] ?? '', // Provide default value if 'Reg' is null
+                            date: data['Date'] ?? '', // Provide default value if 'Date' is null
+                            summary: data['Summary'] ?? '', // Provide default value if 'Summary' is null
+                            hazard: data['Hazard'] ?? '', // Provide default value if 'Hazard' is null
+                            location: data['Location'] ?? '', // Provide default value if 'Location' is null
+                            recommendation: data['Recommendation'] ?? '', // Provide default value if 'Recommendation' is null
+                            risk_index: data['Risk_index'] ?? '', // Provide default value if 'Risk_index' is null
+                            Rod_couse: data['Rod_couse'] ?? '', // Provide default value if 'Rod_couse' is null
+                          );
+                        }).toList();
+
+                        return ListView.builder(
+                          itemCount: _foundSubject!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            // Pass each Subject_model object to customListTile
+                            return customListTile(_foundSubject![index], context);
+                          },
+                        );
+                      }),
+                ),
+              ),
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>  AddSubject()),
-            );
-          },
-          child: Icon(Icons.add),
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  AddSubjectOther()),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

@@ -165,7 +165,7 @@ class Subject extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
                             color: Color(0xFFAFE1F5),

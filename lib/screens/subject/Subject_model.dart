@@ -1,4 +1,6 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Subject_model {
   String event;
   String date;
@@ -27,7 +29,7 @@ class Subject_model {
     hazard,
     summary
   ];
-  Map<String, dynamic> toJson() {
+   toJson() {
     return {
       'Event': event,
       'date': date,
@@ -39,6 +41,20 @@ class Subject_model {
       'location': location,
       'recommendation': recommendation,
     };
+  }
+  factory Subject_model.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+    return Subject_model(
+      event: data['event'],
+      date: data['date'],
+      Reg: data['Reg'],
+      summary: data['summary'],
+      Rod_couse: data['Rod_couse'],
+      hazard: data['hazard'],
+      risk_index: data['risk_index'],
+      location: data['location'],
+      recommendation: data['recommendation'],
+    );
   }
 
 }
