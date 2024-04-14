@@ -29,7 +29,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
   bool _error = false;
   String texterror = '';
   bool _done = false;
-  String textdone = '';
+  String textDone = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,6 +75,16 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
             SizedBox(height: 20),
             TextField(
               controller: _regController,
+              keyboardType: TextInputType.multiline,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.title_outlined),
+                  hintText: 'Enter Hazard',
+                  labelText: 'Hazard'),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _HazardController,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -194,7 +204,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
                 setState(() {
                   _loading = false;
                   _done=true;
-                  textdone='Subject add successfully';
+                  textDone='Subject add successfully';
                   // dropdownValueLocation=listReg.first;
                   //dropdownValueReg= listLocation.first;
                   _locationController.clear();
@@ -235,7 +245,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
                     color: Colors.red,
                   )),
             if (_done)
-              Text(textdone,
+              Text(textDone,
                   style: const TextStyle(
                     fontSize: 20,
                     fontFamily: 'Cairo',

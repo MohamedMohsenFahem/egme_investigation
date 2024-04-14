@@ -7,14 +7,14 @@ import 'package:get/get.dart';
 
 
 
-class AddSubjectAir extends StatefulWidget {
-  const AddSubjectAir({super.key});
+class AddSubjectEGME extends StatefulWidget {
+  const AddSubjectEGME({super.key});
 
   @override
-  State<AddSubjectAir> createState() => _AddSubjectAirState();
+  State<AddSubjectEGME> createState() => _AddSubjectEGMEState();
 }
 
-class _AddSubjectAirState extends State<AddSubjectAir> {
+class _AddSubjectEGMEState extends State<AddSubjectEGME> {
   final TextEditingController _eventController = TextEditingController();
   final TextEditingController _regController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
@@ -71,16 +71,6 @@ class _AddSubjectAirState extends State<AddSubjectAir> {
                   prefixIcon: Icon(Icons.title_outlined),
                   hintText: 'Enter Reg',
                   labelText: 'Reg'),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _regController,
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.title_outlined),
-                  hintText: 'Enter Hazard',
-                  labelText: 'Hazard'),
             ),
             const SizedBox(height: 20),
             TextField(
@@ -187,7 +177,7 @@ class _AddSubjectAirState extends State<AddSubjectAir> {
                   rod_cause: _rodCauseController.text.trim(),
                 );
                 try {
-                  await _db.collection('SubjectAirCairo').add(Subject.toJson());
+                  await _db.collection('SubjectEGME').add(Subject.toJson());
                   Get.snackbar('Success', 'Subject has been added',
                       snackPosition: SnackPosition.BOTTOM,
                       backgroundColor: Colors.white,
