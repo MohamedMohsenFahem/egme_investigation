@@ -291,7 +291,7 @@ class Subject extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                        subject_items.Rod_couse,
+                        subject_items.rod_cause,
                         softWrap: true,
                         style: TextStyle(
                           fontSize: 20.0,

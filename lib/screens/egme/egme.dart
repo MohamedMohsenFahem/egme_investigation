@@ -133,104 +133,104 @@ List<String> listLocation = <String>[
   'Safety',
   'Quality',
 ];
+ List<String> ListHazard = <String>[
+  'Equipment/part not installed',
+  'Wrong equipment/part installed',
+  'Wrong orientation',
+  'Improper location',
+  'Incomplete installation',
+  'Extra parts installed',
+  'Access not closed',
+  'System/equipment not deactivated /reactivated',
+  'Damaged on installation',
+  'Cross connection',
+  'Not enough fluid',
+  'Too much fluid',
+  'Wrong fluid type',
+  'Required servicing not performed',
+  'Access not closed',
+  'System/equipment notdeactivated/reactivated',
+  'Unapproved Repair',
+  'Incomplete Repair',
+  'Incorrect Repair',
+  'Did not detect fault',
+  'Not found by fault isolation',
+  'Not found by operational/functional test',
+  'Not found by inspection',
+  'Access not closed',
+  'System/equipment not deactivated /reactivated',
+  'MEL interpretation/application/removal',
+  'CDL interpretation/application/removal',
+  'Incorrectly deferred/controlled defect',
+  'Technical(aircraft) log use and oversight',
+  'Maintenance (Mx) task not correctly documented',
+  'Not authorized/qualified/certified to do task',
+  'Material / Tools left in aircraft/engine',
+  'Debris on ramp',
+  'Debris falling into open systems',
+  'Tools/equipment used improperly',
+  'Defective tools/equipment used',
+  'Struck by/against',
+  'Pulled/pushed/drove into',
+  'Using GSE without proper approval',
+  'Slip/trip/fall',
+  'Caught in/on/between',
+  'Struck by/against',
+  'Hazard contacted (e.g., electricity, hot or cold surfaces, and sharp surfaces)',
+  'Hazardous substance exposure (e.g.,toxic or noxious substances)',
+  'Hazardous thermal environment exposure(heat,cold, or humidity)',
+  'Exceeding legal extra hours',
+  'Pandemic',
+  'Rain storm',
+  'Sand storm',
+  'Lightning storm',
+  'FOG',
+  'A/C Maintenance Program Control error',
+  'Wrong / Incomplete / late reply to a technical query',
+  'TCI Monitoring error',
+  'OVER DUE AD/ROUTINE TASK',
+  'Information with ambiguities',
+  'Scheduled task omitted/late/incorrect',
+  'Airworthiness data interpretation',
+  'Airworthiness Directive overrun',
+  'Modification control',
+  'Configuration control',
+  'Records control',
+  'Component robbery control',
+  'Maintenance (Mx) information system (entry or update)',
+  'Time expired part on board aircraft',
+  'Part defected during handling',
+  'Zero hours part',
+  'Part stored under wrong PN',
+  'Report not received within specified period',
+  'Report not delivered to authority within specified period',
+  'Poor Generic / Specific hazard identified',
+  'Poor Risk index identified',
+  'Wrong report category identified',
+  'Poor/complicated reportig system',
+  'Wrong / incomplete root cause identified',
+  'Wrong / incomplete recommendations',
+  'Wrong identification of Spacific Hazard type',
+  'Inaccurate or incomplete risk assessments',
+  'Failure to consider the dynamic nature of operational environments when assessing risks.',
+  'Inconsistent criteria for assessing the severityand Probabilty of identified risks.',
+  'Inadequate monitoring of safety performance indicators.',
+  'Inaccurate or delayed reporting of safety performance indicators.',
+  'Lack of feedback loops to assess the effectiveness of safety assurance activities.',
+  'Failure to adapt safety assurance processes in response to changes in operations orregulations.',
+  'Insufficient data analysis tools to identifyemerging trends.',
+  'Wrong analysis for Data Base',
+  'No/Poor monitor for safety actions',
+];
 
 class _EGMEState extends State<EGME> {
   List<Subject_model>? subjects = [];
   List<Subject_model>? _foundSubject;
   bool _showSearchSubject = false;
-  bool _showSearchHazard = false;
   late String HazardSearch;
   String searchValue = '';
-  final List<String> _suggestionsHazard = [
-    'Equipment/part not installed',
-    'Wrong equipment/part installed',
-    'Wrong orientation',
-    'Improper location',
-    'Incomplete installation',
-    'Extra parts installed',
-    'Access not closed',
-    'System/equipment not deactivated /reactivated',
-    'Damaged on installation',
-    'Cross connection',
-    'Not enough fluid',
-    'Too much fluid',
-    'Wrong fluid type',
-    'Required servicing not performed',
-    'Access not closed',
-    'System/equipment notdeactivated/reactivated',
-    'Unapproved Repair',
-    'Incomplete Repair',
-    'Incorrect Repair',
-    'Did not detect fault',
-    'Not found by fault isolation',
-    'Not found by operational/functional test',
-    'Not found by inspection',
-    'Access not closed',
-    'System/equipment not deactivated /reactivated',
-    'MEL interpretation/application/removal',
-    'CDL interpretation/application/removal',
-    'Incorrectly deferred/controlled defect',
-    'Technical(aircraft) log use and oversight',
-    'Maintenance (Mx) task not correctly documented',
-    'Not authorized/qualified/certified to do task',
-    'Material / Tools left in aircraft/engine',
-    'Debris on ramp',
-    'Debris falling into open systems',
-    'Tools/equipment used improperly',
-    'Defective tools/equipment used',
-    'Struck by/against',
-    'Pulled/pushed/drove into',
-    'Using GSE without proper approval',
-    'Slip/trip/fall',
-    'Caught in/on/between',
-    'Struck by/against',
-    'Hazard contacted (e.g., electricity, hot or cold surfaces, and sharp surfaces)',
-    'Hazardous substance exposure (e.g.,toxic or noxious substances)',
-    'Hazardous thermal environment exposure(heat,cold, or humidity)',
-    'Exceeding legal extra hours',
-    'Pandemic',
-    'Rain storm',
-    'Sand storm',
-    'Lightning storm',
-    'FOG',
-    'A/C Maintenance Program Control error',
-    'Wrong / Incomplete / late reply to a technical query',
-    'TCI Monitoring error',
-    'OVER DUE AD/ROUTINE TASK',
-    'Information with ambiguities',
-    'Scheduled task omitted/late/incorrect',
-    'Airworthiness data interpretation',
-    'Airworthiness Directive overrun',
-    'Modification control',
-    'Configuration control',
-    'Records control',
-    'Component robbery control',
-    'Maintenance (Mx) information system (entry or update)',
-    'Time expired part on board aircraft',
-    'Part defected during handling',
-    'Zero hours part',
-    'Part stored under wrong PN',
-    'Report not received within specified period',
-    'Report not delivered to authority within specified period',
-    'Poor Generic / Specific hazard identified',
-    'Poor Risk index identified',
-    'Wrong report category identified',
-    'Poor/complicated reportig system',
-    'Wrong / incomplete root cause identified',
-    'Wrong / incomplete recommendations',
-    'Wrong identification of Spacific Hazard type',
-    'Inaccurate or incomplete risk assessments',
-    'Failure to consider the dynamic nature of operational environments when assessing risks.',
-    'Inconsistent criteria for assessing the severityand Probabilty of identified risks.',
-    'Inadequate monitoring of safety performance indicators.',
-    'Inaccurate or delayed reporting of safety performance indicators.',
-    'Lack of feedback loops to assess the effectiveness of safety assurance activities.',
-    'Failure to adapt safety assurance processes in response to changes in operations orregulations.',
-    'Insufficient data analysis tools to identifyemerging trends.',
-    'Wrong analysis for Data Base',
-    'No/Poor monitor for safety actions',
-  ];
   String dropdownValueReg = listReg.first;
+  String dropdownValueHazard = ListHazard.first;
   String dropdownValueLocation = listLocation.first;
   CollectionReference _db = FirebaseFirestore.instance.collection('SubjectEGME');
   late Stream<QuerySnapshot> _dbSubject;
@@ -279,7 +279,7 @@ class _EGMEState extends State<EGME> {
       } else {
         _foundSubject = subjects
             ?.where((user) =>
-                user.Reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
+                user.reg.toLowerCase().contains(enteredKeyword.toLowerCase()))
             .toList();
       }
     });
@@ -299,16 +299,17 @@ class _EGMEState extends State<EGME> {
       QuerySnapshot querySnapshot = await _db.get();
       List<Subject_model> fetchedSubjects = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        print('Fetched data: $data');
         return Subject_model(
-          event: data['Event'],
-          Reg: data['Reg'],
-          date: data['Date'],
-          summary: data['Summary'],
-          hazard: data['Hazard'],
-          location: data['Location'],
-          recommendation: data['Recommendation'],
-          risk_index: data['Risk_index'],
-          Rod_couse: data['Rod_couse'],
+          event: data['event']??'',
+          reg: data['reg']??'',
+          date: data['date']??'',
+          summary: data['summary']??'',
+          hazard: data['hazard']??'',
+          location: data['location']??'',
+          recommendation: data['recommendation']??'',
+          risk_index: data['risk_index']??'',
+          rod_cause: data['rod_cause']??'',
         );
       }).toList();
 
@@ -338,14 +339,19 @@ class _EGMEState extends State<EGME> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Date',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
+                  SizedBox(
+                    width: 12,
+                  ),
                   DropdownButton<String>(
                     value: dropdownValueReg,
                     icon: const Icon(Icons.arrow_downward),
                     elevation: 16,
-                    underline: Container(
-                      height: 5,
-                      width: 50,
-                    ),
                     onChanged: (String? value) {
                       // This is called when the user selects an item.
                       setState(() {
@@ -360,10 +366,12 @@ class _EGMEState extends State<EGME> {
                       );
                     }).toList(),
                   ),
+                  SizedBox(
+                    width: 12,
+                  ),
                   TextButton(
                       onPressed: () {
                         setState(() {
-                          _showSearchHazard = false;
                           _showSearchSubject =
                           !_showSearchSubject; // Toggle the search bar visibility
                         });
@@ -372,26 +380,13 @@ class _EGMEState extends State<EGME> {
                         'Subject',
                         style: TextStyle(fontSize: 20, color: Colors.black),
                       )),
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _showSearchSubject = false;
-                          _showSearchHazard =
-                          !_showSearchHazard; // Toggle the search bar visibility
-                        });
-                      },
-                      child: Text(
-                        'Hazard',
-                        style: TextStyle(fontSize: 20, color: Colors.black),
-                      )),
+                  SizedBox(
+                    width: 12,
+                  ),
                   DropdownButton<String>(
                     value: dropdownValueLocation,
                     icon: const Icon(Icons.arrow_downward),
                     elevation: 16,
-                    underline: Container(
-                      height: 5,
-                      width: 20,
-                    ),
                     onChanged: (String? value) {
                       // This is called when the user selects an item.
                       setState(() {
@@ -406,36 +401,32 @@ class _EGMEState extends State<EGME> {
                       );
                     }).toList(),
                   ),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Date',
-                        style: TextStyle(fontSize: 20, color: Colors.black),
-                      )),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  DropdownButton<String>(
+                    value: dropdownValueHazard,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        dropdownValueHazard = value!;
+                        _runFilterHazard(value);
+                      });
+                    },
+                    items: ListHazard.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+
                 ],
               ),
             ),
-            if (_showSearchHazard)
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(80),
-                  shape: BoxShape.rectangle,
-                ),
-                child: Autocomplete<String>(
-                  optionsBuilder: (TextEditingValue textEditingValue) {
-                    if (textEditingValue.text == '') {
-                      return Iterable<String>.empty();
-                    }
-                    return _suggestionsHazard.where((String item) {
-                      return item
-                          .contains(textEditingValue.text.toLowerCase());
-                    });
-                  },
-                  onSelected: (String item) {
-                    _runFilterHazard(item);
-                  },
-                ),
-              ),
+
             if (_showSearchSubject)
               Container(
                 alignment: AlignmentDirectional.topCenter,
@@ -467,23 +458,6 @@ class _EGMEState extends State<EGME> {
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         }
-
-                        List<Subject_model> subjectsList = snapshot.data!.docs.map((doc) {
-                          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-                          return Subject_model(
-                            event: data['Event'] ?? '', // Provide default value if 'Event' is null
-                            Reg: data['Reg'] ?? '', // Provide default value if 'Reg' is null
-                            date: data['Date'] ?? '', // Provide default value if 'Date' is null
-                            summary: data['Summary'] ?? '', // Provide default value if 'Summary' is null
-                            hazard: data['Hazard'] ?? '', // Provide default value if 'Hazard' is null
-                            location: data['Location'] ?? '', // Provide default value if 'Location' is null
-                            recommendation: data['Recommendation'] ?? '', // Provide default value if 'Recommendation' is null
-                            risk_index: data['Risk_index'] ?? '', // Provide default value if 'Risk_index' is null
-                            Rod_couse: data['Rod_couse'] ?? '', // Provide default value if 'Rod_couse' is null
-                          );
-                        }).toList();
-
-
                         return ListView.builder(
                           itemCount: _foundSubject!.length,
                           itemBuilder: (BuildContext context, int index) {

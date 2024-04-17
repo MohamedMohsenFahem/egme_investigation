@@ -72,6 +72,16 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
                   hintText: 'Enter Reg',
                   labelText: 'Reg'),
             ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _regController,
+              keyboardType: TextInputType.multiline,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.title_outlined),
+                  hintText: 'Enter Hazard',
+                  labelText: 'Hazard'),
+            ),
             const SizedBox(height: 20),
             TextField(
               controller: _locationController,
@@ -157,14 +167,14 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
                 });
                 Subject_model Subject = Subject_model(
                   event: _eventController.text.trim(),
-                  Reg: _regController.text.trim(),
+                  reg: _regController.text.trim(),
                   date: _dateController.text.trim(),
                   summary: _summaryController.text.trim(),
                   hazard: _HazardController.text.trim(),
                   location: _locationController.text.trim(),
                   recommendation: _recomendationController.text.trim(),
                   risk_index: _riskIndexController.text.trim(),
-                  Rod_couse: _rodCauseController.text.trim(),
+                  rod_cause: _rodCauseController.text.trim(),
                 );
                 try {
                   await _db.collection('SubjectOther').add(Subject.toJson());

@@ -34,7 +34,7 @@ Widget customListTile(Subject_model subject, BuildContext context) {
                 ),
               ),
               child: Text(
-                subject.Reg,
+                subject.reg,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
