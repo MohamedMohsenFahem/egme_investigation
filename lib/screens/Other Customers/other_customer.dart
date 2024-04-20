@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:egme_investigation/screens/Other%20Customers/add_subjectOther.dart';
 import 'package:egme_investigation/screens/subject/subject.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../subject/Subject_model.dart';
 
 
@@ -41,7 +43,7 @@ List<String> listLocation = <String>[
   'Safety',
   'Quality',
 ];
- List<String> ListHazard = <String>[
+List<String> ListHazard = <String>[
   'Equipment/part not installed',
   'Wrong equipment/part installed',
   'Wrong orientation',
@@ -84,9 +86,9 @@ List<String> listLocation = <String>[
   'Slip/trip/fall',
   'Caught in/on/between',
   'Struck by/against',
-  'Hazard contacted (e.g., electricity, hot or cold surfaces, and sharp surfaces)',
-  'Hazardous substance exposure (e.g.,toxic or noxious substances)',
-  'Hazardous thermal environment exposure(heat,cold, or humidity)',
+  'Hazard contacted (e.g., electricity, \nhot or cold surfaces, and sharp surfaces)',
+  'Hazardous substance exposure (e.g.,toxic \nor noxious substances)',
+  'Hazardous thermal environment exposure\n(heat,cold, or humidity)',
   'Exceeding legal extra hours',
   'Pandemic',
   'Rain storm',
@@ -94,7 +96,7 @@ List<String> listLocation = <String>[
   'Lightning storm',
   'FOG',
   'A/C Maintenance Program Control error',
-  'Wrong / Incomplete / late reply to a technical query',
+  'Wrong / Incomplete / late reply to \na technical query',
   'TCI Monitoring error',
   'OVER DUE AD/ROUTINE TASK',
   'Information with ambiguities',
@@ -105,13 +107,13 @@ List<String> listLocation = <String>[
   'Configuration control',
   'Records control',
   'Component robbery control',
-  'Maintenance (Mx) information system (entry or update)',
+  'Maintenance (Mx) information system \n(entry or update)',
   'Time expired part on board aircraft',
   'Part defected during handling',
   'Zero hours part',
   'Part stored under wrong PN',
   'Report not received within specified period',
-  'Report not delivered to authority within specified period',
+  'Report not delivered to authority\n within specified period',
   'Poor Generic / Specific hazard identified',
   'Poor Risk index identified',
   'Wrong report category identified',
@@ -120,13 +122,13 @@ List<String> listLocation = <String>[
   'Wrong / incomplete recommendations',
   'Wrong identification of Spacific Hazard type',
   'Inaccurate or incomplete risk assessments',
-  'Failure to consider the dynamic nature of operational environments when assessing risks.',
-  'Inconsistent criteria for assessing the severityand Probabilty of identified risks.',
-  'Inadequate monitoring of safety performance indicators.',
-  'Inaccurate or delayed reporting of safety performance indicators.',
-  'Lack of feedback loops to assess the effectiveness of safety assurance activities.',
-  'Failure to adapt safety assurance processes in response to changes in operations orregulations.',
-  'Insufficient data analysis tools to identifyemerging trends.',
+  'Failure to consider the dynamic nature \n of operational environments when assessing risks.',
+  'Inconsistent criteria for assessing the \n severityand Probabilty of identified risks.',
+  'Inadequate monitoring of safety\n performance indicators.',
+  'Inaccurate or delayed reporting \nof safety performance indicators.',
+  'Lack of feedback loops to assess \nthe effectiveness of safety assurance activities.',
+  'Failure to adapt safety assurance processes\n in response to changes in operations orregulations.',
+  'Insufficient data analysis tools\n to identifyemerging trends.',
   'Wrong analysis for Data Base',
   'No/Poor monitor for safety actions',
 ];
@@ -260,23 +262,28 @@ class _OtherCustomerState extends State<OtherCustomer> {
                   SizedBox(
                     width: 12,
                   ),
-                  DropdownButton<String>(
-                    value: dropdownValueReg,
-                    icon: const Icon(Icons.arrow_downward),
-                    elevation: 16,
-                    onChanged: (String? value) {
-                      // This is called when the user selects an item.
-                      setState(() {
-                        dropdownValueReg = value!;
-                        _runFilterReg(value);
-                      });
-                    },
-                    items: listReg.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                  SizedBox(
+                    width: 100,
+                    height: 50,
+                    child: DropdownButton<String>(
+                      value: dropdownValueReg,
+                      icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      alignment: Alignment.center,
+                      onChanged: (String? value) {
+                        // This is called when the user selects an item.
+                        setState(() {
+                          dropdownValueReg = value!;
+                          _runFilterReg(value);
+                        });
+                      },
+                      items: listReg.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
                   ),
                   TextButton(
                       onPressed: () {
@@ -307,45 +314,54 @@ class _OtherCustomerState extends State<OtherCustomer> {
                       )),
                   SizedBox(
                     width: 12,
+
                   ),
-                  DropdownButton<String>(
-                    value: dropdownValueLocation,
-                    icon: const Icon(Icons.arrow_downward),
-                    elevation: 16,
-                    onChanged: (String? value) {
-                      // This is called when the user selects an item.
-                      setState(() {
-                        dropdownValueLocation = value!;
-                        _runFilterLocation(value);
-                      });
-                    },
-                    items: listLocation.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                  SizedBox(
+                    height: 50,
+                    child: DropdownButton<String>(
+                      value: dropdownValueLocation,
+                      icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      alignment: Alignment.center,
+                      onChanged: (String? value) {
+                        // This is called when the user selects an item.
+                        setState(() {
+                          dropdownValueLocation = value!;
+                          _runFilterLocation(value);
+                        });
+                      },
+                      items: listLocation.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
                   ),
                   SizedBox(
                     width: 12,
                   ),
-                  DropdownButton<String>(
-                    value: dropdownValueHazard,
-                    icon: const Icon(Icons.arrow_downward),
-                    elevation: 16,
-                    onChanged: (String? value) {
-                      // This is called when the user selects an item.
-                      setState(() {
-                        dropdownValueHazard = value!;
-                        _runFilterHazard(value);
-                      });
-                    },
-                    items: ListHazard.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                  SizedBox(
+                    height: 50,
+                    child: DropdownButton<String>(
+                      value: dropdownValueHazard,
+                      icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      alignment: Alignment.center,
+                      onChanged: (String? value) {
+                        // This is called when the user selects an item.
+                        setState(() {
+                          dropdownValueHazard = value!;
+                          _runFilterHazard(value);
+                        });
+                      },
+                      items: ListHazard.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ],
               ),
