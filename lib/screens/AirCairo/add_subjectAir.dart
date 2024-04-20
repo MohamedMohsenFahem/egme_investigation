@@ -84,6 +84,16 @@ class _AddSubjectAirState extends State<AddSubjectAir> {
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: _HazardController,
+              keyboardType: TextInputType.multiline,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.title_outlined),
+                  hintText: 'Enter Hazard',
+                  labelText: 'Hazard'),
+            ),
+            const SizedBox(height: 20),
+            TextField(
               controller: _locationController,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
