@@ -128,128 +128,126 @@ class Subject extends StatelessWidget {
                     height: 20.0,
                   ),
                   //Hazard
-                  SafeArea(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Container(
+                          width: 120,
+                          padding: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.4),
+                                spreadRadius: 2,
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                            color: Color(0xFF85BADB),
+                            borderRadius: BorderRadius.circular(22.0),
+                          ),
                           child: Container(
-                            width: 120,
-                            padding: EdgeInsets.all(6.0),
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.4),
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                              color: Color(0xFF85BADB),
-                              borderRadius: BorderRadius.circular(22.0),
+                            width: MediaQuery.of(context).size.width * 0.6, // 80% of screen width
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Hazard',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
                             ),
-                            child: Container(
-                              height: 50,
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Hazard',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 25.0,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: Color(0xFFAFE1F5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              subject_items.hazard,
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 20.0,
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 25.0,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              color: Color(0xFFAFE1F5),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                subject_items.hazard,
-                                softWrap: true,
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 16.0,
                   ),
-                  SafeArea(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Risk index
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Container(
-                            width: 120,
-                            padding: EdgeInsets.all(6.0),
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.4),
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                              color: Color(0xFF85BADB),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            child: Container(
-                              height: 50,
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Risk index',
-                                style:
-                                    TextStyle(fontSize: 20, color: Colors.white),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Risk index
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Container(
+                          width: 120,
+                          padding: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.4),
+                                spreadRadius: 2,
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
                               ),
-                            ),
+                            ],
+                            color: Color(0xFF85BADB),
+                            borderRadius: BorderRadius.circular(22.0),
                           ),
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Expanded(
-                          flex: 1,
                           child: Container(
+                            width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
+                            height: MediaQuery.of(context).size.height * 0.05,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              color: Color(0xFFAFE1F5),
+                            child: Text(
+                              'Risk index',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                subject_items.risk_index,
-                                softWrap: true,
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: Color(0xFFAFE1F5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              subject_items.risk_index,
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 20.0,
                               ),
                             ),
                           ),
                         ),
-                        //Hazard
-                      ],
-                    ),
+                      ),
+                      //Hazard
+                    ],
                   ),
                   SizedBox(
                     height: 16.0,

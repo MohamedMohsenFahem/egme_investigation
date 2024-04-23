@@ -373,12 +373,13 @@ class _AirCairoState extends State<AirCairo> {
                     width: 12,
                   ),
                   SizedBox(
-                    width: 100,
                     height: 50,
                     child: DropdownButton<String>(
                       value: dropdownValueReg,
                       icon: const Icon(Icons.arrow_downward),
                       elevation: 16,
+                      focusColor: Colors.blue.shade200,
+                      borderRadius: BorderRadius.circular(16),
                       alignment: Alignment.center,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
@@ -420,6 +421,8 @@ class _AirCairoState extends State<AirCairo> {
                       value: dropdownValueLocation,
                       icon: const Icon(Icons.arrow_downward),
                       elevation: 16,
+                      focusColor: Colors.blue.shade200,
+                      borderRadius: BorderRadius.circular(16),
                       alignment: Alignment.center,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
@@ -445,7 +448,9 @@ class _AirCairoState extends State<AirCairo> {
                     child: DropdownButton<String>(
                       value: dropdownValueHazard,
                       icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
+                      itemHeight: 70,
+                      focusColor: Colors.blue.shade200,
+                      borderRadius: BorderRadius.circular(16),
                       alignment: Alignment.center,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.

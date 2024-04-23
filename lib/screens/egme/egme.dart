@@ -352,13 +352,14 @@ class _EGMEState extends State<EGME> {
                       width: 12,
                     ),
                     SizedBox(
-                      width: 100,
                       height: 50,
                       child: DropdownButton<String>(
                         value: dropdownValueReg,
                         icon: const Icon(Icons.arrow_downward),
                         elevation: 16,
-                        alignment: Alignment.center,
+                        focusColor: Colors.blue.shade200,
+                        alignment: Alignment.centerLeft,
+                        borderRadius: BorderRadius.circular(16),
                         onChanged: (String? value) {
                           // This is called when the user selects an item.
                           setState(() {
@@ -397,6 +398,8 @@ class _EGMEState extends State<EGME> {
                         value: dropdownValueLocation,
                         icon: const Icon(Icons.arrow_downward),
                         elevation: 16,
+                        focusColor: Colors.blue.shade200,
+                        borderRadius: BorderRadius.circular(16),
                         alignment: Alignment.center,
                         onChanged: (String? value) {
                           // This is called when the user selects an item.
@@ -422,6 +425,9 @@ class _EGMEState extends State<EGME> {
                         value: dropdownValueHazard,
                         icon: const Icon(Icons.arrow_downward),
                         elevation: 16,
+                        itemHeight: 70,
+                        focusColor: Colors.blue.shade200,
+                        borderRadius: BorderRadius.circular(16),
                         alignment: Alignment.center,
                         onChanged: (String? value) {
                           // This is called when the user selects an item.
