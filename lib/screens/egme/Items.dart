@@ -46,6 +46,8 @@ Widget customListTile(Subject_model subject, BuildContext context) {
               children: [
                 Text(
                   subject.event,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -69,6 +71,8 @@ Widget customListTile(Subject_model subject, BuildContext context) {
             ),
             subtitle: Text(
               subject.hazard,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
               style: TextStyle(
                 color: Colors.black,
               ),

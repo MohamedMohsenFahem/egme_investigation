@@ -3,6 +3,8 @@ import 'package:egme_investigation/screens/Subject/Subject_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 
 
@@ -15,6 +17,11 @@ class AddSubjectOther extends StatefulWidget {
 }
 
 class _AddSubjectOtherState extends State<AddSubjectOther> {
+  CalendarFormat _calendarFormat = CalendarFormat.week;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+
   final TextEditingController _eventController = TextEditingController();
   final TextEditingController _regController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
@@ -74,16 +81,6 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
             ),
             SizedBox(height: 20),
             TextField(
-              controller: _regController,
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.title_outlined),
-                  hintText: 'Enter Hazard',
-                  labelText: 'Hazard'),
-            ),
-            const SizedBox(height: 20),
-            TextField(
               controller: _HazardController,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
@@ -104,13 +101,67 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
             ),
             const SizedBox(height: 20),
             TextField(
-                controller: _dateController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.date_range_outlined),
-                    hintText: 'Enter Date',
-                    labelText: 'Date')),
+              controller: _dateController,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(
+                    Icons.date_range_outlined,
+                  ),
+                  hintText: 'Enter Date   EX:DD/MM/YY',
+                  labelText: 'Date'),
+            ),
+            TableCalendar(
+              firstDay: DateTime.utc(2010, 10, 20),
+              lastDay: DateTime.now(),
+              focusedDay: _focusedDay,
+              calendarFormat: _calendarFormat,
+              onHeaderTapped: (focusedDay) {
+                // Show date picker on header tapped
+                showDatePicker(
+                  context: context,
+                  initialDate: focusedDay,
+                  firstDate: DateTime.utc(2010, 1, 1),
+                  lastDate: DateTime.now(),
+                ).then((selectedDate) {
+                  if (selectedDate != null) {
+                    setState(() {
+                      _focusedDay = selectedDate;
+                    });
+                  }
+                });
+              },
+              selectedDayPredicate: (day) {
+                // Use `selectedDayPredicate` to determine which day is currently selected.
+                // If this returns true, then `day` will be marked as selected.
+                // Using `isSameDay` is recommended to disregard
+                // the time-part of compared DateTime objects.
+                return isSameDay(_selectedDay, day);
+              },
+              onDaySelected: (selectedDay, focusedDay) {
+                if (!isSameDay(_selectedDay, selectedDay)) {
+                  // Call `setState()` when updating the selected day
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                  });
+                  String dateString = dateFormat.format(_selectedDay!);
+                  _dateController.text = dateString;
+                }
+              },
+              onFormatChanged: (format) {
+                if (_calendarFormat != format) {
+                  // Call `setState()` when updating calendar format
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                }
+              },
+              onPageChanged: (focusedDay) {
+                // No need to call `setState()` here
+                _focusedDay = focusedDay;
+              },
+            ),
             const SizedBox(height: 20),
             TextField(
                 controller: _riskIndexController,

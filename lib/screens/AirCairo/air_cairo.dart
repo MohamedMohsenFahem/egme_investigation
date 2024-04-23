@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:egme_investigation/screens/AirCairo/add_subjectAir.dart';
-import 'package:egme_investigation/screens/subject/subject.dart';
+import 'package:egme_investigation/screens/egme/Items.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 import '../subject/Subject_model.dart';
 
 class AirCairo extends StatefulWidget {
@@ -149,109 +150,29 @@ List<String> ListHazard = <String>[
   'Failure to adapt safety assurance processes\n in response to changes in operations orregulations.',
   'Insufficient data analysis tools\n to identifyemerging trends.',
   'Wrong analysis for Data Base.',
-
   'No/Poor monitor for safety actions.',
 ];
+
 class _AirCairoState extends State<AirCairo> {
+  CalendarFormat _calendarFormat = CalendarFormat.week;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+  bool _showSearchSubject = false;
+  bool _showSearchDate = false;
+  bool _showSearchHazard = false;
+  bool _showSearchLocation = false;
+  bool _showSearchReg = false;
+
   List<Subject_model>? subjects = [];
   List<Subject_model>? _foundSubject;
-  bool _showSearchSubject = false;
-  bool _showSearchHazard = false;
   late String HazardSearch;
   String searchValue = '';
-  final List<String> _suggestions = [
-    'Equipment/part not installed',
-    'Wrong equipment/part installed',
-    'Wrong orientation',
-    'Improper location',
-    'Incomplete installation',
-    'Extra parts installed',
-    'Access not closed',
-    'System/equipment not deactivated /reactivated',
-    'Damaged on installation',
-    'Cross connection',
-    'Not enough fluid',
-    'Too much fluid',
-    'Wrong fluid type',
-    'Required servicing not performed',
-    'Access not closed',
-    'System/equipment notdeactivated/reactivated',
-    'Unapproved Repair',
-    'Incomplete Repair',
-    'Incorrect Repair',
-    'Did not detect fault',
-    'Not found by fault isolation',
-    'Not found by operational/functional test',
-    'Not found by inspection',
-    'Access not closed',
-    'System/equipment not deactivated /reactivated',
-    'MEL interpretation/application/removal',
-    'CDL interpretation/application/removal',
-    'Incorrectly deferred/controlled defect',
-    'Technical(aircraft) log use and oversight',
-    'Maintenance (Mx) task not correctly documented',
-    'Not authorized/qualified/certified to do task',
-    'Material / Tools left in aircraft/engine',
-    'Debris on ramp',
-    'Debris falling into open systems',
-    'Tools/equipment used improperly',
-    'Defective tools/equipment used',
-    'Struck by/against',
-    'Pulled/pushed/drove into',
-    'Using GSE without proper approval',
-    'Slip/trip/fall',
-    'Caught in/on/between',
-    'Struck by/against',
-    'Hazard contacted (e.g., electricity, hot or cold surfaces, and sharp surfaces)',
-    'Hazardous substance exposure (e.g.,toxic or noxious substances)',
-    'Hazardous thermal environment exposure(heat,cold, or humidity)',
-    'Exceeding legal extra hours',
-    'Pandemic',
-    'Rain storm',
-    'Sand storm',
-    'Lightning storm',
-    'FOG',
-    'A/C Maintenance Program Control error',
-    'Wrong / Incomplete / late reply to a technical query',
-    'TCI Monitoring error',
-    'OVER DUE AD/ROUTINE TASK',
-    'Information with ambiguities',
-    'Scheduled task omitted/late/incorrect',
-    'Airworthiness data interpretation',
-    'Airworthiness Directive overrun',
-    'Modification control',
-    'Configuration control',
-    'Records control',
-    'Component robbery control',
-    'Maintenance (Mx) information system (entry or update)',
-    'Time expired part on board aircraft',
-    'Part defected during handling',
-    'Zero hours part',
-    'Part stored under wrong PN',
-    'Report not received within specified period',
-    'Report not delivered to authority within specified period',
-    'Poor Generic / Specific hazard identified',
-    'Poor Risk index identified',
-    'Wrong report category identified',
-    'Poor/complicated reportig system',
-    'Wrong / incomplete root cause identified',
-    'Wrong / incomplete recommendations',
-    'Wrong identification of Spacific Hazard type',
-    'Inaccurate or incomplete risk assessments',
-    'Failure to consider the dynamic nature of operational environments when assessing risks.',
-    'Inconsistent criteria for assessing the severityand Probabilty of identified risks.',
-    'Inadequate monitoring of safety performance indicators.',
-    'Inaccurate or delayed reporting of safety performance indicators.',
-    'Lack of feedback loops to assess the effectiveness of safety assurance activities.',
-    'Failure to adapt safety assurance processes in response to changes in operations orregulations.',
-    'Insufficient data analysis tools to identifyemerging trends.',
-    'Wrong analysis for Data Base',
-    'No/Poor monitor for safety actions',
-  ];
   String dropdownValueHazard = ListHazard.first;
   String dropdownValueReg = listReg.first;
   String dropdownValueLocation = listLocation.first;
-  CollectionReference _db = FirebaseFirestore.instance.collection('SubjectAirCairo');
+  CollectionReference _db =
+      FirebaseFirestore.instance.collection('SubjectAirCairo');
   late Stream<QuerySnapshot> _dbSubject;
   @override
   void initState() {
@@ -317,6 +238,7 @@ class _AirCairoState extends State<AirCairo> {
       }
     });
   }
+
   void _fetchData() async {
     try {
       QuerySnapshot querySnapshot = await _db.get();
@@ -324,15 +246,15 @@ class _AirCairoState extends State<AirCairo> {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         print('Fetched data: $data');
         return Subject_model(
-          event: data['event']??'',
-          reg: data['reg']??'',
-          date: data['date']??'',
-          summary: data['summary']??'',
-          hazard: data['hazard']??'',
-          location: data['location']??'',
-          recommendation: data['recommendation']??'',
-          risk_index: data['risk_index']??'',
-          rod_cause: data['rod_cause']??'',
+          event: data['event'] ?? '',
+          reg: data['reg'] ?? '',
+          date: data['date'] ?? '',
+          summary: data['summary'] ?? '',
+          hazard: data['hazard'] ?? '',
+          location: data['location'] ?? '',
+          recommendation: data['recommendation'] ?? '',
+          risk_index: data['risk_index'] ?? '',
+          rod_cause: data['rod_cause'] ?? '',
         );
       }).toList();
 
@@ -344,6 +266,20 @@ class _AirCairoState extends State<AirCairo> {
       print("Error fetching data: $e");
     }
   }
+  void _runFilterDate(String enteredKeyword) {
+    setState(() {
+      print(enteredKeyword);
+      if (enteredKeyword.isEmpty) {
+        _foundSubject = subjects;
+      } else {
+        _foundSubject = subjects
+            ?.where((subject) => subject.date == enteredKeyword)
+            .toList();
+      }
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -354,8 +290,7 @@ class _AirCairoState extends State<AirCairo> {
         backgroundColor: Colors.lightBlue[50],
         title: Text('Air Cairo'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
+      body: Container(
         child: Column(
           children: [
             SingleChildScrollView(
@@ -364,7 +299,16 @@ class _AirCairoState extends State<AirCairo> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          _showSearchDate = !_showSearchDate;
+                          _showSearchLocation = false;
+                          _showSearchReg = false;
+                          _showSearchHazard = false;
+                          _showSearchSubject = false;
+                          print('pressed $_showSearchDate $_showSearchHazard');
+                        });
+                      },
                       child: Text(
                         'Date',
                         style: TextStyle(fontSize: 20, color: Colors.black),
@@ -372,40 +316,18 @@ class _AirCairoState extends State<AirCairo> {
                   SizedBox(
                     width: 12,
                   ),
-                  SizedBox(
-                    height: 50,
-                    child: DropdownButton<String>(
-                      value: dropdownValueReg,
-                      icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
-                      focusColor: Colors.blue.shade200,
-                      borderRadius: BorderRadius.circular(16),
-                      alignment: Alignment.center,
-                      onChanged: (String? value) {
-                        // This is called when the user selects an item.
-                        setState(() {
-                          dropdownValueReg = value!;
-                          _runFilterReg(value);
-                        });
-                      },
-                      items: listReg
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
                   TextButton(
                       onPressed: () {
                         setState(() {
-                          _showSearchHazard = false;
+                          print(
+                              'pressed subject $_showSearchDate $_showSearchSubject');
+
                           _showSearchSubject =
-                              !_showSearchSubject; // Toggle the search bar visibility
+                          !_showSearchSubject; // Toggle the search bar visibility
+                          _showSearchLocation = false;
+                          _showSearchReg = false;
+                          _showSearchHazard = false;
+                          _showSearchDate = false;
                         });
                       },
                       child: Text(
@@ -415,62 +337,115 @@ class _AirCairoState extends State<AirCairo> {
                   SizedBox(
                     width: 12,
                   ),
-                  SizedBox(
-                    height: 50,
-                    child: DropdownButton<String>(
-                      value: dropdownValueLocation,
-                      icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
-                      focusColor: Colors.blue.shade200,
-                      borderRadius: BorderRadius.circular(16),
-                      alignment: Alignment.center,
-                      onChanged: (String? value) {
-                        // This is called when the user selects an item.
+                  TextButton(
+                      onPressed: () {
                         setState(() {
-                          dropdownValueLocation = value!;
-                          _runFilterLocation(value);
+                          print(
+                              'pressed hazard $_showSearchDate $_showSearchHazard');
+                          _showSearchHazard =
+                          !_showSearchHazard; // Toggle the search bar visibility
+                          _showSearchLocation = false;
+                          _showSearchReg = false;
+                          _showSearchDate = false;
+                          _showSearchSubject = false;
                         });
                       },
-                      items: listLocation
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
+                      child: Text(
+                        'Hazard',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
                   SizedBox(
                     width: 12,
                   ),
-                  SizedBox(
-                    height: 50,
-                    child: DropdownButton<String>(
-                      value: dropdownValueHazard,
-                      icon: const Icon(Icons.arrow_downward),
-                      itemHeight: 70,
-                      focusColor: Colors.blue.shade200,
-                      borderRadius: BorderRadius.circular(16),
-                      alignment: Alignment.center,
-                      onChanged: (String? value) {
-                        // This is called when the user selects an item.
+                  TextButton(
+                      onPressed: () {
                         setState(() {
-                          dropdownValueHazard = value!;
-                          _runFilterHazard(value);
+                          _showSearchReg =
+                          !_showSearchReg; // Toggle the search bar visibility
+                          _showSearchLocation = false;
+                          _showSearchSubject = false;
+                          _showSearchHazard = false;
+                          _showSearchDate = false;
                         });
                       },
-                      items: ListHazard.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: SafeArea(child: Text(value)),
-                        );
-                      }).toList(),
-                    ),
+                      child: Text(
+                        'Reg',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
+                  SizedBox(
+                    width: 12,
                   ),
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _showSearchLocation =
+                          !_showSearchLocation; // Toggle the search bar visibility
+                          _showSearchSubject = false;
+                          _showSearchReg = false;
+                          _showSearchHazard = false;
+                          _showSearchDate = false;
+                        });
+                      },
+                      child: Text(
+                        'Location',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
                 ],
               ),
             ),
 
+            if (_showSearchDate == true)
+              TableCalendar(
+                firstDay: DateTime.utc(2010, 10, 20),
+                lastDay: DateTime.now(),
+                focusedDay: _focusedDay,
+                calendarFormat: _calendarFormat,
+                onHeaderTapped: (focusedDay) {
+                  // Show date picker on header tapped
+                  showDatePicker(
+                    context: context,
+                    initialDate: focusedDay,
+                    firstDate: DateTime.utc(2010, 1, 1),
+                    lastDate: DateTime.now(),
+                  ).then((selectedDate) {
+                    if (selectedDate != null) {
+                      setState(() {
+                        _focusedDay = selectedDate;
+                      });
+                    }
+                  });
+                },
+                selectedDayPredicate: (day) {
+                  // Use `selectedDayPredicate` to determine which day is currently selected.
+                  // If this returns true, then `day` will be marked as selected.
+                  // Using `isSameDay` is recommended to disregard
+                  // the time-part of compared DateTime objects.
+                  return isSameDay(_selectedDay, day);
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    // Call `setState()` when updating the selected day
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                    });
+                    String dateString = dateFormat.format(_selectedDay!);
+                    _runFilterDate(dateString);
+                  }
+                },
+                onFormatChanged: (format) {
+                  if (_calendarFormat != format) {
+                    // Call `setState()` when updating calendar format
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  }
+                },
+                onPageChanged: (focusedDay) {
+                  // No need to call `setState()` here
+                  _focusedDay = focusedDay;
+                },
+              ),
             if (_showSearchSubject)
               Container(
                 alignment: AlignmentDirectional.topCenter,
@@ -487,6 +462,82 @@ class _AirCairoState extends State<AirCairo> {
                       suffixIcon: Icon(Icons.search)),
                 ),
               ),
+            if (_showSearchHazard)
+              SizedBox(
+                height: 50,
+                child: DropdownButton<String>(
+                  value: dropdownValueHazard,
+                  icon: const Icon(Icons.arrow_downward),
+                  elevation: 16,
+                  itemHeight: 70,
+                  borderRadius: BorderRadius.circular(16),
+                  alignment: Alignment.center,
+                  onChanged: (String? value) {
+                    // This is called when the user selects an item.
+                    setState(() {
+                      dropdownValueHazard = value!;
+                      _runFilterHazard(value);
+                    });
+                  },
+                  items: ListHazard.map<DropdownMenuItem<String>>(
+                          (String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                ),
+              ),
+            if (_showSearchLocation)
+              SizedBox(
+                height: 50,
+                child: DropdownButton<String>(
+                  value: dropdownValueLocation,
+                  icon: const Icon(Icons.arrow_downward),
+                  elevation: 16,
+                  borderRadius: BorderRadius.circular(16),
+                  alignment: Alignment.center,
+                  onChanged: (String? value) {
+                    // This is called when the user selects an item.
+                    setState(() {
+                      dropdownValueLocation = value!;
+                      _runFilterLocation(value);
+                    });
+                  },
+                  items: listLocation
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+            if (_showSearchReg)
+              SizedBox(
+                height: 50,
+                child: DropdownButton<String>(
+                  value: dropdownValueReg,
+                  icon: const Icon(Icons.arrow_downward),
+                  elevation: 16,
+                  borderRadius: BorderRadius.circular(16),
+                  alignment: Alignment.center,
+                  onChanged: (String? value) {
+                    // This is called when the user selects an item.
+                    setState(() {
+                      dropdownValueReg = value!;
+                      _runFilterReg(value);
+                    });
+                  },
+                  items:
+                  listReg.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -499,14 +550,16 @@ class _AirCairoState extends State<AirCairo> {
                           return Center(child: Text(snapshot.error.toString()));
                         }
 
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         }
                         return ListView.builder(
                           itemCount: _foundSubject!.length,
                           itemBuilder: (BuildContext context, int index) {
                             // Pass each Subject_model object to customListTile
-                            return customListTile(_foundSubject![index], context);
+                            return customListTile(
+                                _foundSubject![index], context);
                           },
                         );
                       }),
@@ -517,10 +570,10 @@ class _AirCairoState extends State<AirCairo> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>  AddSubjectAir()),
+            MaterialPageRoute(builder: (context) => AddSubjectAir()),
           );
         },
         child: Icon(Icons.add),
@@ -528,95 +581,4 @@ class _AirCairoState extends State<AirCairo> {
     );
   }
 
-  Widget customListTile(Subject_model subject, BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Subject(
-              subject_items: subject,
-            ),
-          ),
-        );
-      },
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xFFB3E5FC),
-            ),
-            child: ListTile(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-              leading: Container(
-                padding: EdgeInsets.only(right: 12.0),
-                decoration: BoxDecoration(
-                  border: Border(
-                    right: BorderSide(width: 1.0, color: Colors.white24),
-                  ),
-                ),
-                child: Text(
-                  subject.reg,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    subject.event,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    subject.date,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text(
-                    subject.location,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  )
-                ],
-              ),
-              subtitle: Text(
-                subject.hazard,
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              trailing: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Subject(
-                        subject_items: subject,
-                      ),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.keyboard_arrow_left_outlined),
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
