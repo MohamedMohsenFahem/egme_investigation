@@ -81,7 +81,7 @@ class _AddSubjectEGMEState extends State<AddSubjectEGME> {
             ),
             SizedBox(height: 20),
             TextField(
-              controller: _regController,
+              controller: _HazardController,
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),

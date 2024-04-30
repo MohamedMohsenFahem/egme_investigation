@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:egme_investigation/screens/Other%20Customers/add_subjectOther.dart';
-import 'package:egme_investigation/screens/subject/subject.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../egme/Items.dart';
@@ -162,6 +159,11 @@ class _OtherCustomerState extends State<OtherCustomer> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
+  DateTime? _rangeStart;
+  DateTime? _rangeEnd;
+
+
   bool _showSearchSubject = false;
   bool _showSearchDate = false;
   bool _showSearchHazard = false;
@@ -249,7 +251,6 @@ class _OtherCustomerState extends State<OtherCustomer> {
       QuerySnapshot querySnapshot = await _db.get();
       List<Subject_model> fetchedSubjects = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        print('Fetched data: $data');
         return Subject_model(
           event: data['event'] ?? '',
           reg: data['reg'] ?? '',
@@ -271,7 +272,8 @@ class _OtherCustomerState extends State<OtherCustomer> {
       print("Error fetching data: $e");
     }
   }
-  void _runFilterDate(String enteredKeyword) {
+
+  void _runFilterDay(String enteredKeyword) {
     setState(() {
       print(enteredKeyword);
       if (enteredKeyword.isEmpty) {
@@ -283,6 +285,28 @@ class _OtherCustomerState extends State<OtherCustomer> {
       }
     });
   }
+
+  void _runFilterRange(String startDateStr, String endDateStr) {
+    try {
+      DateTime startDate = dateFormat.parse(startDateStr);
+      DateTime endDate = dateFormat.parse(endDateStr);
+
+      // Filter subjects based on the date range
+      _foundSubject = subjects?.where((subject) {
+        DateTime subjectDate = dateFormat.parse(subject.date);
+
+        // Check if the subject date is within the range
+        return subjectDate.isAfter(startDate.subtract(const Duration(days: 1))) &&
+            subjectDate.isBefore(endDate.add(const Duration(days: 1)));
+      }).toList();
+    } catch (e) {
+      print('Error parsing date: $e');
+      // Handle the error gracefully, e.g., by setting _foundSubject to an empty list or showing a user-friendly error message
+      _foundSubject = [];
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -401,6 +425,8 @@ class _OtherCustomerState extends State<OtherCustomer> {
                 firstDay: DateTime.utc(2010, 10, 20),
                 lastDay: DateTime.now(),
                 focusedDay: _focusedDay,
+                rangeStartDay: _rangeStart,
+                rangeEndDay: _rangeEnd,
                 calendarFormat: _calendarFormat,
                 onHeaderTapped: (focusedDay) {
                   // Show date picker on header tapped
@@ -418,13 +444,12 @@ class _OtherCustomerState extends State<OtherCustomer> {
                   });
                 },
                 selectedDayPredicate: (day) {
-                  // Use `selectedDayPredicate` to determine which day is currently selected.
-                  // If this returns true, then `day` will be marked as selected.
-                  // Using `isSameDay` is recommended to disregard
-                  // the time-part of compared DateTime objects.
                   return isSameDay(_selectedDay, day);
                 },
                 onDaySelected: (selectedDay, focusedDay) {
+                  _rangeStart = null; // Important to clean those
+                  _rangeEnd = null;
+                  _rangeSelectionMode = RangeSelectionMode.toggledOff;
                   if (!isSameDay(_selectedDay, selectedDay)) {
                     // Call `setState()` when updating the selected day
                     setState(() {
@@ -432,9 +457,24 @@ class _OtherCustomerState extends State<OtherCustomer> {
                       _focusedDay = focusedDay;
                     });
                     String dateString = dateFormat.format(_selectedDay!);
-                    _runFilterDate(dateString);
+                    _runFilterDay(dateString);
                   }
                 },
+                onRangeSelected: (start, end, focusedDay) {
+                  setState(() {
+                    _selectedDay = null;
+                    _focusedDay = focusedDay;
+                    _rangeStart = start;
+                    _rangeEnd = end;
+                    _rangeSelectionMode = RangeSelectionMode.toggledOn;
+                    if (_rangeStart != null && _rangeEnd != null) {
+                      String dateStart = dateFormat.format(_rangeStart!);
+                      String dateEnd = dateFormat.format(_rangeEnd!);
+                      _runFilterRange(dateStart, dateEnd);
+                    }
+                  });
+                },
+                rangeSelectionMode: _rangeSelectionMode,
                 onFormatChanged: (format) {
                   if (_calendarFormat != format) {
                     // Call `setState()` when updating calendar format
@@ -444,7 +484,6 @@ class _OtherCustomerState extends State<OtherCustomer> {
                   }
                 },
                 onPageChanged: (focusedDay) {
-                  // No need to call `setState()` here
                   _focusedDay = focusedDay;
                 },
               ),
