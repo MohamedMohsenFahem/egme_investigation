@@ -163,7 +163,6 @@ class _OtherCustomerState extends State<OtherCustomer> {
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
 
-
   bool _showSearchSubject = false;
   bool _showSearchDate = false;
   bool _showSearchHazard = false;
@@ -296,7 +295,8 @@ class _OtherCustomerState extends State<OtherCustomer> {
         DateTime subjectDate = dateFormat.parse(subject.date);
 
         // Check if the subject date is within the range
-        return subjectDate.isAfter(startDate.subtract(const Duration(days: 1))) &&
+        return subjectDate
+                .isAfter(startDate.subtract(const Duration(days: 1))) &&
             subjectDate.isBefore(endDate.add(const Duration(days: 1)));
       }).toList();
     } catch (e) {
@@ -304,7 +304,6 @@ class _OtherCustomerState extends State<OtherCustomer> {
       // Handle the error gracefully, e.g., by setting _foundSubject to an empty list or showing a user-friendly error message
       _foundSubject = [];
     }
-
   }
 
   @override
@@ -349,7 +348,7 @@ class _OtherCustomerState extends State<OtherCustomer> {
                               'pressed subject $_showSearchDate $_showSearchSubject');
 
                           _showSearchSubject =
-                          !_showSearchSubject; // Toggle the search bar visibility
+                              !_showSearchSubject; // Toggle the search bar visibility
                           _showSearchLocation = false;
                           _showSearchReg = false;
                           _showSearchHazard = false;
@@ -369,7 +368,7 @@ class _OtherCustomerState extends State<OtherCustomer> {
                           print(
                               'pressed hazard $_showSearchDate $_showSearchHazard');
                           _showSearchHazard =
-                          !_showSearchHazard; // Toggle the search bar visibility
+                              !_showSearchHazard; // Toggle the search bar visibility
                           _showSearchLocation = false;
                           _showSearchReg = false;
                           _showSearchDate = false;
@@ -387,7 +386,7 @@ class _OtherCustomerState extends State<OtherCustomer> {
                       onPressed: () {
                         setState(() {
                           _showSearchReg =
-                          !_showSearchReg; // Toggle the search bar visibility
+                              !_showSearchReg; // Toggle the search bar visibility
                           _showSearchLocation = false;
                           _showSearchSubject = false;
                           _showSearchHazard = false;
@@ -405,7 +404,7 @@ class _OtherCustomerState extends State<OtherCustomer> {
                       onPressed: () {
                         setState(() {
                           _showSearchLocation =
-                          !_showSearchLocation; // Toggle the search bar visibility
+                              !_showSearchLocation; // Toggle the search bar visibility
                           _showSearchSubject = false;
                           _showSearchReg = false;
                           _showSearchHazard = false;
@@ -419,7 +418,6 @@ class _OtherCustomerState extends State<OtherCustomer> {
                 ],
               ),
             ),
-
             if (_showSearchDate == true)
               TableCalendar(
                 firstDay: DateTime.utc(2010, 10, 20),
@@ -520,13 +518,13 @@ class _OtherCustomerState extends State<OtherCustomer> {
                       _runFilterHazard(value);
                     });
                   },
-                  items: ListHazard.map<DropdownMenuItem<String>>(
-                          (String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+                  items:
+                      ListHazard.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
               ),
             if (_showSearchLocation)
@@ -570,8 +568,7 @@ class _OtherCustomerState extends State<OtherCustomer> {
                       _runFilterReg(value);
                     });
                   },
-                  items:
-                  listReg.map<DropdownMenuItem<String>>((String value) {
+                  items: listReg.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -621,5 +618,4 @@ class _OtherCustomerState extends State<OtherCustomer> {
       ),
     );
   }
-
 }

@@ -135,6 +135,7 @@ List<String> listLocation = <String>[
   'Quality',
 ];
 List<String> ListHazard = <String>[
+  '                               Installation',
   'Equipment/part not installed',
   'Wrong equipment/part installed',
   'Wrong orientation',
@@ -145,35 +146,42 @@ List<String> ListHazard = <String>[
   'System/equipment not deactivated /reactivated',
   'Damaged on installation',
   'Cross connection',
+  '                              Servicing',
   'Not enough fluid',
   'Too much fluid',
   'Wrong fluid type',
   'Required servicing not performed',
   'Access not closed',
   'System/equipment notdeactivated/reactivated',
+  '                              Repair',
   'Unapproved Repair',
   'Incomplete Repair',
   'Incorrect Repair',
+  '                          Fault Isolation/Test/Inspection',
   'Did not detect fault',
   'Not found by fault isolation',
   'Not found by operational/functional test',
   'Not found by inspection',
   'Access not closed',
   'System/equipment not deactivated /reactivated',
+  '                               Documentation',
   'MEL interpretation/application/removal',
   'CDL interpretation/application/removal',
   'Incorrectly deferred/controlled defect',
   'Technical(aircraft) log use and oversight',
   'Maintenance (Mx) task not correctly documented',
   'Not authorized/qualified/certified to do task',
+  '                                FOD',
   'Material / Tools left in aircraft/engine',
   'Debris on ramp',
   'Debris falling into open systems',
+  '                                Tool/GSE',
   'Tools/equipment used improperly',
   'Defective tools/equipment used',
   'Struck by/against',
   'Pulled/pushed/drove into',
   'Using GSE without proper approval',
+  '                                 Human',
   'Slip/trip/fall',
   'Caught in/on/between',
   'Struck by/against',
@@ -181,11 +189,13 @@ List<String> ListHazard = <String>[
   'Hazardous substance exposure (e.g.,toxic \nor noxious substances)',
   'Hazardous thermal environment exposure\n(heat,cold, or humidity)',
   'Exceeding legal extra hours',
+  '                                  Natural',
   'Pandemic',
   'Rain storm',
   'Sand storm',
   'Lightning storm',
   'FOG',
+  '                                  CAMO',
   'A/C Maintenance Program Control error',
   'Wrong / Incomplete / late reply to \na technical query',
   'TCI Monitoring error',
@@ -200,9 +210,11 @@ List<String> ListHazard = <String>[
   'Component robbery control',
   'Maintenance (Mx) information system \n(entry or update)',
   'Time expired part on board aircraft',
+  '                                      Material',
   'Part defected during handling',
   'Zero hours part',
   'Part stored under wrong PN',
+  '                                       Safety',
   'Report not received within specified period',
   'Report not delivered to authority\n within specified period',
   'Poor Generic / Specific hazard identified',
@@ -336,6 +348,7 @@ class _EGMEState extends State<EGME> {
       print("Error fetching data: $e");
     }
   }
+
   void _runFilterDay(String enteredKeyword) {
     setState(() {
       print(enteredKeyword);
@@ -348,6 +361,7 @@ class _EGMEState extends State<EGME> {
       }
     });
   }
+
   void _runFilterRange(String startDateStr, String endDateStr) {
     try {
       DateTime startDate = dateFormat.parse(startDateStr);
@@ -369,9 +383,6 @@ class _EGMEState extends State<EGME> {
 
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -390,6 +401,7 @@ class _EGMEState extends State<EGME> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
+                  //date
                   TextButton(
                       onPressed: () {
                         setState(() {
@@ -408,6 +420,7 @@ class _EGMEState extends State<EGME> {
                   SizedBox(
                     width: 12,
                   ),
+                  //Subject
                   TextButton(
                       onPressed: () {
                         setState(() {
@@ -429,6 +442,7 @@ class _EGMEState extends State<EGME> {
                   SizedBox(
                     width: 12,
                   ),
+                  //Hazard
                   TextButton(
                       onPressed: () {
                         setState(() {
@@ -449,6 +463,7 @@ class _EGMEState extends State<EGME> {
                   SizedBox(
                     width: 12,
                   ),
+                  //Reg
                   TextButton(
                       onPressed: () {
                         setState(() {
@@ -467,6 +482,7 @@ class _EGMEState extends State<EGME> {
                   SizedBox(
                     width: 12,
                   ),
+                  //Location
                   TextButton(
                       onPressed: () {
                         setState(() {
@@ -581,7 +597,7 @@ class _EGMEState extends State<EGME> {
                   value: dropdownValueHazard,
                   icon: const Icon(Icons.arrow_downward),
                   elevation: 16,
-                  itemHeight: 70,
+                  itemHeight: 90,
                   borderRadius: BorderRadius.circular(16),
                   alignment: Alignment.center,
                   onChanged: (String? value) {
