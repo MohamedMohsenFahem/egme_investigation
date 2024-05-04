@@ -14,6 +14,7 @@ class AirCairo extends StatefulWidget {
 }
 
 List<String> listReg = <String>[
+  'Choose Reg',
   'SU-BPU',
   'SU-BPV',
   'SU-BPW',
@@ -40,7 +41,9 @@ List<String> listReg = <String>[
   'SU-BUJ',
   'SU-BUK'
 ];
+
 List<String> listLocation = <String>[
+  'Choose Location',
   'Line shifts',
   ' Weeky check',
   'Tech.support',
@@ -64,7 +67,10 @@ List<String> listLocation = <String>[
   'Safety',
   'Quality',
 ];
+
 List<String> ListHazard = <String>[
+  'Choose Hazard',
+  '                  Installation',
   'Equipment/part not installed',
   'Wrong equipment/part installed',
   'Wrong orientation',
@@ -75,48 +81,58 @@ List<String> ListHazard = <String>[
   'System/equipment not deactivated /reactivated',
   'Damaged on installation',
   'Cross connection',
+  '                  Servicing',
   'Not enough fluid',
   'Too much fluid',
   'Wrong fluid type',
   'Required servicing not performed',
   'Access not closed',
   'System/equipment notdeactivated/reactivated',
+  '                     Repair',
   'Unapproved Repair',
   'Incomplete Repair',
   'Incorrect Repair',
+  '                  Fault Isolation/Test/Inspection',
   'Did not detect fault',
   'Not found by fault isolation',
   'Not found by operational/functional test',
   'Not found by inspection',
   'Access not closed',
-  'System/equipment not deactivated /reactivated',
+  'System/equipment not deactivated /reactivated\n',
+  '                     Documentation\n',
   'MEL interpretation/application/removal',
   'CDL interpretation/application/removal',
   'Incorrectly deferred/controlled defect',
   'Technical(aircraft) log use and oversight',
   'Maintenance (Mx) task not correctly documented',
   'Not authorized/qualified/certified to do task',
+  '                          FOD',
   'Material / Tools left in aircraft/engine',
   'Debris on ramp',
   'Debris falling into open systems',
+  '                        Tool/GSE',
   'Tools/equipment used improperly',
   'Defective tools/equipment used',
   'Struck by/against',
   'Pulled/pushed/drove into',
   'Using GSE without proper approval',
+  '                         Human',
   'Slip/trip/fall',
   'Caught in/on/between',
-  'Hazard contacted (e.g., electricity, \nhot or cold surfaces, and sharp surfaces)',
-  'Hazardous substance exposure (e.g.,toxic \nor noxious substances)',
-  'Hazardous thermal environment exposure\n(heat,cold, or humidity)',
+  'Struck by/against',
+  'Hazard contacted (e.g., electricity,hot or cold surfaces, and sharp surfaces)\n',
+  'Hazardous substance exposure (e.g.,toxic or noxious substances)\n',
+  'Hazardous thermal environment exposure (heat,cold, or humidity)\n',
   'Exceeding legal extra hours',
+  '                          Natural',
   'Pandemic',
   'Rain storm',
   'Sand storm',
   'Lightning storm',
   'FOG',
+  '                           CAMO',
   'A/C Maintenance Program Control error',
-  'Wrong / Incomplete / late reply to \na technical query',
+  'Wrong / Incomplete / late reply to a technical query\n',
   'TCI Monitoring error',
   'OVER DUE AD/ROUTINE TASK',
   'Information with ambiguities',
@@ -127,14 +143,16 @@ List<String> ListHazard = <String>[
   'Configuration control',
   'Records control',
   'Component robbery control',
-  'Maintenance (Mx) information system \n(entry or update)',
+  'Maintenance (Mx) information system (entry or update)',
   'Time expired part on board aircraft',
+  '                            Material',
   'Part defected during handling',
   'Zero hours part',
   'Part stored under wrong PN',
+  '                             Safety',
   'Report not received within specified period',
-  'Report not delivered to authority\n within specified period',
-  'Poor Generic / Specific hazard identified',
+  'Report not delivered to authority within specified period',
+  'Poor Generic Specific hazard identified',
   'Poor Risk index identified',
   'Wrong report category identified',
   'Poor/complicated reportig system',
@@ -142,15 +160,15 @@ List<String> ListHazard = <String>[
   'Wrong / incomplete recommendations',
   'Wrong identification of Spacific Hazard type',
   'Inaccurate or incomplete risk assessments',
-  'Failure to consider the dynamic nature \n of operational environments when assessing risks.',
-  'Inconsistent criteria for assessing the \n severityand Probabilty of identified risks.',
-  'Inadequate monitoring of safety\n performance indicators.',
-  'Inaccurate or delayed reporting \nof safety performance indicators.',
-  'Lack of feedback loops to assess \nthe effectiveness of safety assurance activities.',
-  'Failure to adapt safety assurance processes\n in response to changes in operations orregulations.',
-  'Insufficient data analysis tools\n to identifyemerging trends.',
-  'Wrong analysis for Data Base.',
-  'No/Poor monitor for safety actions.',
+  'Failure to consider the dynamic nature of operational environments when assessing risks.\n\n\n',
+  '\nInconsistent criteria for assessing the severityand Probabilty of identified risks.\n\n\n',
+  '\nInadequate monitoring of safety performance indicators.',
+  '\nInaccurate or delayed reporting of safety performance indicators.\n\n',
+  '\nLack of feedback loops to assess the effectiveness of safety assurance activities.\n\n',
+  '\nFailure to adapt safety assurance processes in response to changes in operations orregulations.\n\n',
+  '\nInsufficient data analysis tools to identifyemerging trends.\n',
+  'Wrong analysis for Data Base',
+  'No/Poor monitor for safety actions',
 ];
 
 class _AirCairoState extends State<AirCairo> {
@@ -444,10 +462,6 @@ class _AirCairoState extends State<AirCairo> {
                   });
                 },
                 selectedDayPredicate: (day) {
-                  // Use `selectedDayPredicate` to determine which day is currently selected.
-                  // If this returns true, then `day` will be marked as selected.
-                  // Using `isSameDay` is recommended to disregard
-                  // the time-part of compared DateTime objects.
                   return isSameDay(_selectedDay, day);
                 },
                 daysOfWeekVisible: true,
@@ -509,15 +523,16 @@ class _AirCairoState extends State<AirCairo> {
                 ),
               ),
             if (_showSearchHazard)
-              SizedBox(
-                height: 50,
+              Container(
+                width: 300,
                 child: DropdownButton<String>(
                   value: dropdownValueHazard,
+                  isExpanded: true,
                   icon: const Icon(Icons.arrow_downward),
-                  elevation: 16,
-                  itemHeight: 70,
+                  elevation: 1,
+                  itemHeight: 100,
+                  dropdownColor: Color(0xFFB3E5FC),
                   borderRadius: BorderRadius.circular(16),
-                  alignment: Alignment.center,
                   onChanged: (String? value) {
                     // This is called when the user selects an item.
                     setState(() {
@@ -541,6 +556,7 @@ class _AirCairoState extends State<AirCairo> {
                   value: dropdownValueLocation,
                   icon: const Icon(Icons.arrow_downward),
                   elevation: 16,
+                  dropdownColor: Color(0xFFB3E5FC),
                   borderRadius: BorderRadius.circular(16),
                   alignment: Alignment.center,
                   onChanged: (String? value) {
@@ -560,14 +576,16 @@ class _AirCairoState extends State<AirCairo> {
                 ),
               ),
             if (_showSearchReg)
-              SizedBox(
+              Container(
+                width: 200,
                 height: 50,
                 child: DropdownButton<String>(
                   value: dropdownValueReg,
                   icon: const Icon(Icons.arrow_downward),
                   elevation: 16,
+                  isExpanded: true,
+                  dropdownColor: Color(0xFFB3E5FC),
                   borderRadius: BorderRadius.circular(16),
-                  alignment: Alignment.center,
                   onChanged: (String? value) {
                     // This is called when the user selects an item.
                     setState(() {
