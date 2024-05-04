@@ -78,30 +78,33 @@ class Subject extends StatelessWidget {
                   height: 16.0,
                 ),
                 //Summary
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF85BADB),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.4),
-                          spreadRadius: 2,
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(26.0),
-                    ),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Summary',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF85BADB),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.4),
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(26.0),
+                      ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Summary',
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -255,7 +258,7 @@ class Subject extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                //rod cause
+                //root cause
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Container(
@@ -276,7 +279,7 @@ class Subject extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: Text(
-                          'Rod Cause',
+                          'Root Cause',
                           style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -300,7 +303,7 @@ class Subject extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                        subject_items.rod_cause,
+                        subject_items.root_cause,
                         softWrap: true,
                         style: TextStyle(
                           fontSize: 20.0,

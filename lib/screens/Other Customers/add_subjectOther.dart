@@ -248,7 +248,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
   final TextEditingController _summaryController = TextEditingController();
   TextEditingController _HazardController = TextEditingController();
   final TextEditingController _riskIndexController = TextEditingController();
-  final TextEditingController _rodCauseController = TextEditingController();
+  final TextEditingController _rootCauseController = TextEditingController();
   final TextEditingController _recomendationController = TextEditingController();
   final _db = FirebaseFirestore.instance;
   bool _loading = false;
@@ -300,7 +300,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
             Container(
               child: Row(
                 children: [
-                  Icon(Icons.menu),
+                  Icon(Icons.list),
                   SizedBox(
                     width: 5,
                   ),
@@ -347,7 +347,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
             Container(
               child: Row(
                 children: [
-                  Icon(Icons.menu),
+                  Icon(Icons.list),
                   SizedBox(
                     width: 5,
                   ),
@@ -394,7 +394,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
             Container(
               child: Row(
                 children: [
-                  Icon(Icons.menu),
+                  Icon(Icons.list),
                   SizedBox(
                     width: 5,
                   ),
@@ -509,24 +509,24 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
             const SizedBox(height: 20),
             //root cause
             TextField(
-                controller: _rodCauseController,
+                controller: _rootCauseController,
                 keyboardType: TextInputType.multiline,
-                maxLines: 3,
+                maxLines: 5,
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     prefixIcon: Icon(Icons.title_outlined),
-                    hintText: 'Enter Rod Cause',
-                    labelText: 'Rod Cause')),
+                    hintText: 'Enter Root Cause \nEx:1- First item\n     2-second item\n     3- third item\n     and so on.....',
+                    labelText: 'Root Cause')),
             const SizedBox(height: 20),
             // Recommendation
             TextField(
               controller: _recomendationController,
               keyboardType: TextInputType.multiline,
-              maxLines: 5,
+              maxLines: 7,
               decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   prefixIcon: Icon(Icons.title_outlined),
-                  hintText: 'Enter Recommendation',
+                  hintText: 'Enter Recommendation \nEx:1- First item\n      2-second item\n      3- third item\n      4-fourth item\n      5-fifth item\n       and so on.....',
                   labelText: 'Recommendation'),
             ),
             const SizedBox(height: 20),
@@ -574,7 +574,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
                   location: _locationController.text.trim(),
                   recommendation: _recomendationController.text.trim(),
                   risk_index: _riskIndexController.text.trim(),
-                  rod_cause: _rodCauseController.text.trim(),
+                  root_cause: _rootCauseController.text.trim(),
                 );
                 try {
                   await _db.collection('SubjectOther').add(Subject.toJson());
@@ -605,7 +605,7 @@ class _AddSubjectOtherState extends State<AddSubjectOther> {
                   _HazardController.clear();
                   _recomendationController.clear();
                   _riskIndexController.clear();
-                  _rodCauseController.clear();
+                  _rootCauseController.clear();
                 });
               },
               style: ButtonStyle(

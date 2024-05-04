@@ -26,6 +26,7 @@ Widget customListTile(Subject_model subject, BuildContext context) {
           child: ListTile(
             contentPadding:
             EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            //Reg
             leading: Container(
               padding: EdgeInsets.only(right: 12.0),
               decoration: BoxDecoration(
@@ -44,6 +45,7 @@ Widget customListTile(Subject_model subject, BuildContext context) {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                //Event
                 Text(
                   subject.event,
                   overflow: TextOverflow.ellipsis,
@@ -53,6 +55,7 @@ Widget customListTile(Subject_model subject, BuildContext context) {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                //date
                 Text(
                   subject.date,
                   overflow: TextOverflow.fade,
@@ -60,6 +63,7 @@ Widget customListTile(Subject_model subject, BuildContext context) {
                     color: Colors.black,
                   ),
                 ),
+                //Location
                 Text(
                   subject.location,
                   overflow: TextOverflow.fade,
@@ -69,6 +73,7 @@ Widget customListTile(Subject_model subject, BuildContext context) {
                 )
               ],
             ),
+            //Hazard
             subtitle: Text(
               subject.hazard,
               overflow: TextOverflow.ellipsis,

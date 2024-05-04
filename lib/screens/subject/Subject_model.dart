@@ -5,7 +5,7 @@ class Subject_model {
   final String date;
   final String reg;
   final String summary;
-  final String rod_cause;
+  final String root_cause;
   final String hazard;
   final String risk_index;
   final String location;
@@ -20,7 +20,7 @@ class Subject_model {
     required this.risk_index,
     required this.location,
     required this.recommendation,
-    required this.rod_cause,
+    required this.root_cause,
   });
 
   factory Subject_model.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
@@ -30,7 +30,7 @@ class Subject_model {
       date: data['date'] ?? '', // Ensure property name matches Firestore field name
       reg: data['reg'] ?? '', // Ensure property name matches Firestore field name
       summary: data['summary'] ?? '', // Ensure property name matches Firestore field name
-      rod_cause: data['rod_cause'] ?? '', // Ensure property name matches Firestore field name
+      root_cause: data['root_cause'] ?? '', // Ensure property name matches Firestore field name
       hazard: data['hazard'] ?? '', // Ensure property name matches Firestore field name
       risk_index: data['risk_index'] ?? '', // Ensure property name matches Firestore field name
       location: data['location'] ?? '', // Ensure property name matches Firestore field name
@@ -44,7 +44,7 @@ class Subject_model {
       'date': date,
       'reg': reg,
       'summary': summary,
-      'rod_cause': rod_cause,
+      'root_cause': root_cause,
       'hazard': hazard,
       'risk_index': risk_index,
       'location': location,

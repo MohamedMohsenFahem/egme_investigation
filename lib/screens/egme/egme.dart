@@ -340,7 +340,7 @@ class _EGMEState extends State<EGME> {
           location: data['location'] ?? '',
           recommendation: data['recommendation'] ?? '',
           risk_index: data['risk_index'] ?? '',
-          rod_cause: data['rod_cause'] ?? '',
+          root_cause: data['rod_cause'] ?? '',
         );
       }).toList();
 
