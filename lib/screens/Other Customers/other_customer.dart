@@ -268,6 +268,7 @@ class _OtherCustomerState extends State<OtherCustomer> {
       List<Subject_model> fetchedSubjects = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         return Subject_model(
+          id: doc.id,
           event: data['event'] ?? '',
           reg: data['reg'] ?? '',
           date: data['date'] ?? '',

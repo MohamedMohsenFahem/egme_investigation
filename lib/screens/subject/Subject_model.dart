@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Subject_model {
+  final String id;
   final String event;
   final String date;
   final String reg;
@@ -12,6 +13,7 @@ class Subject_model {
   final String recommendation;
 
   Subject_model({
+    required this.id,
     required this.event,
     required this.reg,
     required this.date,
@@ -26,9 +28,10 @@ class Subject_model {
   factory Subject_model.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return Subject_model(
-      event: data['event'] ?? '', // Ensure property name matches Firestore field name
-      date: data['date'] ?? '', // Ensure property name matches Firestore field name
-      reg: data['reg'] ?? '', // Ensure property name matches Firestore field name
+      id: document.id,
+      event: data['event'] ?? '',
+      date: data['date'] ?? '',
+      reg: data['reg'] ?? '',
       summary: data['summary'] ?? '', // Ensure property name matches Firestore field name
       root_cause: data['root_cause'] ?? '', // Ensure property name matches Firestore field name
       hazard: data['hazard'] ?? '', // Ensure property name matches Firestore field name

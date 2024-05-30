@@ -569,23 +569,44 @@ class _AddSubjectEGMEState extends State<AddSubjectEGME> {
                 setState(() {
                   _loading = true;
                 });
-                Subject_model Subject = Subject_model(
-                  event: _eventController.text.trim(),
-                  reg: _regController.text.trim(),
-                  date: _dateController.text.trim(),
-                  summary: _summaryController.text.trim(),
-                  hazard: _HazardController.text.trim(),
-                  location: _locationController.text.trim(),
-                  recommendation: _recomendationController.text.trim(),
-                  risk_index: _riskIndexController.text.trim(),
-                  root_cause: _rootCauseController.text.trim(),
-                );
+                final newSubject = {
+                  'event': _eventController.text,
+                  'reg': _regController.text,
+                  'date': _dateController.text,
+                  'summary': _summaryController.text,
+                  'hazard': _HazardController.text,
+                  'risk_index': _riskIndexController.text,
+                  'location': _locationController.text,
+                  'root_cause': _rootCauseController.text,
+                  'recommendation': _recomendationController.text,
+                };
                 try {
-                  await _db.collection('SubjectEGME').add(Subject.toJson());
-                  Get.snackbar('Success', 'Subject has been added',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.white,
-                      colorText: Colors.black);
+                  // Add the new subject to Firestore
+                  final docRef = await _db.collection('air_subject').add(newSubject);
+                  // Retrieve the document ID
+                  final documentId = docRef.id;
+
+                  // Update the newSubject map with the document ID
+                  newSubject['id'] = documentId;
+
+                  // Create a Subject_model instance with the document ID
+                  final subject = Subject_model(
+                    id: documentId,
+                    event: _eventController.text,
+                    reg: _regController.text,
+                    date: _dateController.text,
+                    summary: _summaryController.text,
+                    hazard: _HazardController.text,
+                    risk_index: _riskIndexController.text,
+                    location: _locationController.text,
+                    root_cause: _rootCauseController.text,
+                    recommendation: _recomendationController.text,
+                  );
+
+                  setState(() {
+                    _done = true;
+                    textDone = 'The record has been added successfully';
+                  });
                 } catch (error) {
                   Get.snackbar(
                     "error",
@@ -594,8 +615,7 @@ class _AddSubjectEGMEState extends State<AddSubjectEGME> {
                     backgroundColor: Colors.white,
                     colorText: Colors.black,
                   );
-                }
-                ;
+                };
                 setState(() {
                   _loading = false;
                   _done = true;

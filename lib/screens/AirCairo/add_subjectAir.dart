@@ -209,377 +209,398 @@ class _AddSubjectAirState extends State<AddSubjectAir> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-            const SizedBox(height: 20),
-            //Event
-            TextField(
-              controller: _eventController,
-              keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.title_outlined),
-                  hintText: 'Enter Event',
-                  labelText: 'Event'),
-            ),
-            const SizedBox(height: 20),
-            //summary
-            TextField(
-              controller: _summaryController,
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.title_outlined),
-                  hintText: 'Enter summary',
-                  labelText: 'Summary'),
-            ),
-            const SizedBox(height: 20),
-            //Reg
-            Container(
-              child: Row(
-                children: [
-                  Icon(Icons.list),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    'Reg',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    width: 200,
-                    height: 50,
-                    child: DropdownButton<String>(
-                      value: dropdownValueReg,
-                      icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
-                      isExpanded: true,
-                      dropdownColor: Color(0xFFB3E5FC),
-                      borderRadius: BorderRadius.circular(16),
-                      onChanged: (String? value) {
-                        // This is called when the user selects an item.
-                        setState(() {
-                          dropdownValueReg = value!;
-                          _regController.text = value;
-                        });
-                      },
-                      items:
-                      listReg.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            //Hazard
-            Container(
-              child: Row(
-                children: [
-                  Icon(Icons.list),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    'Hazard',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    width: 240,
-                    child: DropdownButton<String>(
-                      value: dropdownValueHazard,
-                      icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
-                      isExpanded: true,
-                      itemHeight: 130,
-                      borderRadius: BorderRadius.circular(16),
-                      dropdownColor: Color(0xFFB3E5FC),
-                      onChanged: (String? value) {
-                        // This is called when the user selects an item.
-                        setState(() {
-                          dropdownValueHazard = value!;
-                          _HazardController.text = value;
-                        });
-                      },
-                      items: ListHazard.map<DropdownMenuItem<String>>(
-                              (String value) {
+                const SizedBox(height: 20),
+                //Event
+                TextField(
+                  controller: _eventController,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.title_outlined),
+                      hintText: 'Enter Event',
+                      labelText: 'Event'),
+                ),
+                const SizedBox(height: 20),
+                //summary
+                TextField(
+                  controller: _summaryController,
+                  keyboardType: TextInputType.multiline,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.title_outlined),
+                      hintText: 'Enter summary',
+                      labelText: 'Summary'),
+                ),
+                const SizedBox(height: 20),
+                //Reg
+                Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.list),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Reg',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Container(
+                        width: 200,
+                        height: 50,
+                        child: DropdownButton<String>(
+                          value: dropdownValueReg,
+                          icon: const Icon(Icons.arrow_downward),
+                          elevation: 16,
+                          isExpanded: true,
+                          dropdownColor: Color(0xFFB3E5FC),
+                          borderRadius: BorderRadius.circular(16),
+                          onChanged: (String? value) {
+                            // This is called when the user selects an item.
+                            setState(() {
+                              dropdownValueReg = value!;
+                              _regController.text = value;
+                            });
+                          },
+                          items:
+                          listReg.map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
                             );
                           }).toList(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            //Location
-            Container(
-              child: Row(
-                children: [
-                  Icon(Icons.list),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    'Location',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    child: DropdownButton<String>(
-                      value: dropdownValueLocation,
-                      icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
-                      borderRadius: BorderRadius.circular(16),
-                      dropdownColor: Color(0xFFB3E5FC),
-                      onChanged: (String? value) {
-                        // This is called when the user selects an item.
-                        setState(() {
-                          dropdownValueLocation = value!;
-                          _locationController.text = value;
-                        });
-                      },
-                      items: listLocation
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            //date
-            TextField(
-              controller: _dateController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(
-                    Icons.date_range_outlined,
-                  ),
-                  hintText: 'Enter Date   EX:DD/MM/YY',
-                  labelText: 'Date'),
-            ),
-            TableCalendar(
-              firstDay: DateTime.utc(2010, 10, 20),
-              lastDay: DateTime.now(),
-              focusedDay: _focusedDay,
-              calendarFormat: _calendarFormat,
-              onHeaderTapped: (focusedDay) {
-                // Show date picker on header tapped
-                showDatePicker(
-                  context: context,
-                  initialDate: focusedDay,
-                  firstDate: DateTime.utc(2010, 1, 1),
-                  lastDate: DateTime.now(),
-                ).then((selectedDate) {
-                  if (selectedDate != null) {
-                    setState(() {
-                      _focusedDay = selectedDate;
-                    });
-                  }
-                });
-              },
-              selectedDayPredicate: (day) {
-                // Use `selectedDayPredicate` to determine which day is currently selected.
-                // If this returns true, then `day` will be marked as selected.
-                // Using `isSameDay` is recommended to disregard
-                // the time-part of compared DateTime objects.
-                return isSameDay(_selectedDay, day);
-              },
-              onDaySelected: (selectedDay, focusedDay) {
-                if (!isSameDay(_selectedDay, selectedDay)) {
-                  // Call `setState()` when updating the selected day
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                  String dateString = dateFormat.format(_selectedDay!);
-                  _dateController.text = dateString;
-                }
-              },
-              onFormatChanged: (format) {
-                if (_calendarFormat != format) {
-                  // Call `setState()` when updating calendar format
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                }
-              },
-              onPageChanged: (focusedDay) {
-                // No need to call `setState()` here
-                _focusedDay = focusedDay;
-              },
-            ),
-            const SizedBox(height: 20),
-            //Risk index
-            TextField(
-                controller: _riskIndexController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    hintText: 'Enter Risk Index',
-                    labelText: 'Risk Index')),
-            const SizedBox(height: 20),
-            //root cause
-            TextField(
-                controller: _rootCauseController,
-                keyboardType: TextInputType.multiline,
-                maxLines: 5,
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.title_outlined),
-                    hintText: 'Enter Root Cause \nEx:1- First item\n     2-second item\n     3- third item\n     and so on.....',
-                    labelText: 'Rod Cause')),
-            const SizedBox(height: 20),
-            //recommendation
-            TextField(
-              controller: _recomendationController,
-              keyboardType: TextInputType.multiline,
-              maxLines: 7,
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.title_outlined),
-                  hintText: 'Enter Recommendation \nEx:1- First item\n      2-second item\n      3- third item\n      4-fourth item\n      5-fifth item\n       and so on.....',
-                  labelText: 'Recommendation'),
-            ),
-            const SizedBox(height: 20),
-            // add subject
-            ElevatedButton(
-              onPressed: () async {
-                setState(() {
-                  _loading = false;
-                  _error = false;
-                  texterror = '';
-                });
-                String event = _eventController.text.trim();
-                if (event.isEmpty) {
-                  setState(() {
-                    _error = true;
-                    texterror = 'Event is empty';
-                  });
-                  return;
-                }
-                String summary = _summaryController.text.trim();
-                if (summary.isEmpty) {
-                  setState(() {
-                    _error = true;
-                    texterror = 'Summary is empty';
-                  });
-                  return;
-                }
-                String riskIndex = _riskIndexController.text.trim();
-                if (riskIndex.isEmpty) {
-                  setState(() {
-                    _error = true;
-                    texterror = 'Risk Index is empty';
-                  });
-                  return;
-                }
-                setState(() {
-                  _loading = true;
-                });
-                Subject_model Subject = Subject_model(
-                  event: _eventController.text.trim(),
-                  reg: _regController.text.trim(),
-                  date: _dateController.text.trim(),
-                  summary: _summaryController.text.trim(),
-                  hazard: _HazardController.text.trim(),
-                  location: _locationController.text.trim(),
-                  recommendation: _recomendationController.text.trim(),
-                  risk_index: _riskIndexController.text.trim(),
-                  root_cause: _rootCauseController.text.trim(),
-                );
-                try {
-                  await _db.collection('SubjectAirCairo').add(Subject.toJson());
-                  Get.snackbar('Success', 'Subject has been added',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.white,
-                      colorText: Colors.black);
-                } catch (error) {
-                  Get.snackbar(
-                    "error",
-                    "something went wrong",
-                    snackPosition: SnackPosition.BOTTOM,
-                    backgroundColor: Colors.white,
-                    colorText: Colors.black,
-                  );
-                };
-                setState(() {
-                  _loading = false;
-                  _done=true;
-                  textdone='Subject add successfully';
-                  // dropdownValueLocation=listReg.first;
-                  //dropdownValueReg= listLocation.first;
-                  _locationController.clear();
-                  _regController.clear();
-                  _eventController.clear();
-                  _dateController.clear();
-                  _summaryController.clear();
-                  _HazardController.clear();
-                  _recomendationController.clear();
-                  _riskIndexController.clear();
-                  _rootCauseController.clear();
-                });
-              },
-              style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(const Size(250, 10)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          side: const BorderSide(color: Colors.deepPurple)))),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: const Text(
-                  'Add Subject',
-                  style: TextStyle(
-                    color: Color(0xFF0d47A1),
-                    fontSize: 25,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 20),
+                SizedBox(height: 20),
+                //Hazard
+                Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.list),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Hazard',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Container(
+                        width: 240,
+                        child: DropdownButton<String>(
+                          value: dropdownValueHazard,
+                          icon: const Icon(Icons.arrow_downward),
+                          elevation: 16,
+                          isExpanded: true,
+                          itemHeight: 130,
+                          borderRadius: BorderRadius.circular(16),
+                          dropdownColor: Color(0xFFB3E5FC),
+                          onChanged: (String? value) {
+                            // This is called when the user selects an item.
+                            setState(() {
+                              dropdownValueHazard = value!;
+                              _HazardController.text = value;
+                            });
+                          },
+                          items: ListHazard.map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                //Location
+                Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.list),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Location',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Container(
+                        child: DropdownButton<String>(
+                          value: dropdownValueLocation,
+                          icon: const Icon(Icons.arrow_downward),
+                          elevation: 16,
+                          borderRadius: BorderRadius.circular(16),
+                          dropdownColor: Color(0xFFB3E5FC),
+                          onChanged: (String? value) {
+                            // This is called when the user selects an item.
+                            setState(() {
+                              dropdownValueLocation = value!;
+                              _locationController.text = value;
+                            });
+                          },
+                          items: listLocation
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                //date
+                TextField(
+                  controller: _dateController,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      prefixIcon: const Icon(
+                        Icons.date_range_outlined,
+                      ),
+                      hintText: 'Enter Date   EX:DD/MM/YY',
+                      labelText: 'Date'),
+                ),
+                TableCalendar(
+                  firstDay: DateTime.utc(2010, 10, 20),
+                  lastDay: DateTime.now(),
+                  focusedDay: _focusedDay,
+                  calendarFormat: _calendarFormat,
+                  onHeaderTapped: (focusedDay) {
+                    // Show date picker on header tapped
+                    showDatePicker(
+                      context: context,
+                      initialDate: focusedDay,
+                      firstDate: DateTime.utc(2010, 1, 1),
+                      lastDate: DateTime.now(),
+                    ).then((selectedDate) {
+                      if (selectedDate != null) {
+                        setState(() {
+                          _focusedDay = selectedDate;
+                        });
+                      }
+                    });
+                  },
+                  selectedDayPredicate: (day) {
+                    // Use `selectedDayPredicate` to determine which day is currently selected.
+                    // If this returns true, then `day` will be marked as selected.
+                    // Using `isSameDay` is recommended to disregard
+                    // the time-part of compared DateTime objects.
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    if (!isSameDay(_selectedDay, selectedDay)) {
+                      // Call `setState()` when updating the selected day
+                      setState(() {
+                        _selectedDay = selectedDay;
+                        _focusedDay = focusedDay;
+                      });
+                      String dateString = dateFormat.format(_selectedDay!);
+                      _dateController.text = dateString;
+                    }
+                  },
+                  onFormatChanged: (format) {
+                    if (_calendarFormat != format) {
+                      // Call `setState()` when updating calendar format
+                      setState(() {
+                        _calendarFormat = format;
+                      });
+                    }
+                  },
+                  onPageChanged: (focusedDay) {
+                    // No need to call `setState()` here
+                    _focusedDay = focusedDay;
+                  },
+                ),
+                const SizedBox(height: 20),
+                //Risk index
+                TextField(
+                    controller: _riskIndexController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText: 'Enter Risk Index',
+                        labelText: 'Risk Index')),
+                const SizedBox(height: 20),
+                //root cause
+                TextField(
+                    controller: _rootCauseController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.title_outlined),
+                        hintText: 'Enter Root Cause \nEx:1- First item\n     2-second item\n     3- third item\n     and so on.....',
+                        labelText: 'Rod Cause')),
+                const SizedBox(height: 20),
+                //recommendation
+                TextField(
+                  controller: _recomendationController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 7,
+                  decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.title_outlined),
+                      hintText: 'Enter Recommendation \nEx:1- First item\n      2-second item\n      3- third item\n      4-fourth item\n      5-fifth item\n       and so on.....',
+                      labelText: 'Recommendation'),
+                ),
+                const SizedBox(height: 20),
+                // add subject
+                ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      _loading = false;
+                      _error = false;
+                      texterror = '';
+                    });
+                    String event = _eventController.text.trim();
+                    if (event.isEmpty) {
+                      setState(() {
+                        _error = true;
+                        texterror = 'Event is empty';
+                      });
+                      return;
+                    }
+                    String summary = _summaryController.text.trim();
+                    if (summary.isEmpty) {
+                      setState(() {
+                        _error = true;
+                        texterror = 'Summary is empty';
+                      });
+                      return;
+                    }
+                    String riskIndex = _riskIndexController.text.trim();
+                    if (riskIndex.isEmpty) {
+                      setState(() {
+                        _error = true;
+                        texterror = 'Risk Index is empty';
+                      });
+                      return;
+                    }
+                    setState(() {
+                      _loading = true;
+                    });
+                    final newSubject = {
+                      'event': _eventController.text,
+                      'reg': _regController.text,
+                      'date': _dateController.text,
+                      'summary': _summaryController.text,
+                      'hazard': _HazardController.text,
+                      'risk_index': _riskIndexController.text,
+                      'location': _locationController.text,
+                      'root_cause': _rootCauseController.text,
+                      'recommendation': _recomendationController.text,
+                    };
+                    try {
+                      // Add the new subject to Firestore
+                      final docRef = await _db.collection('air_subject').add(newSubject);
+                      // Retrieve the document ID
+                      final documentId = docRef.id;
+
+                      // Update the newSubject map with the document ID
+                      newSubject['id'] = documentId;
+
+                      // Create a Subject_model instance with the document ID
+                      final subject = Subject_model(
+                        id: documentId,
+                        event: _eventController.text,
+                        reg: _regController.text,
+                        date: _dateController.text,
+                        summary: _summaryController.text,
+                        hazard: _HazardController.text,
+                        risk_index: _riskIndexController.text,
+                        location: _locationController.text,
+                        root_cause: _rootCauseController.text,
+                        recommendation: _recomendationController.text,
+                      );
+
+                      setState(() {
+                        _done = true;
+                        textdone = 'The record has been added successfully';
+                      });
+                    } catch (error) {
+                      Get.snackbar(
+                        "error",
+                        "something went wrong",
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.white,
+                        colorText: Colors.black,
+                      );
+                    };
+                    setState(() {
+                      _loading = false;
+                      _done=true;
+                      textdone='Subject add successfully';
+                      // dropdownValueLocation=listReg.first;
+                      //dropdownValueReg= listLocation.first;
+                      _locationController.clear();
+                      _regController.clear();
+                      _eventController.clear();
+                      _dateController.clear();
+                      _summaryController.clear();
+                      _HazardController.clear();
+                      _recomendationController.clear();
+                      _riskIndexController.clear();
+                      _rootCauseController.clear();
+                    });
+                  },
+                  style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(const Size(250, 10)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: const BorderSide(color: Colors.deepPurple)))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text(
+                      'Add Subject',
+                      style: TextStyle(
+                        color: Color(0xFF0d47A1),
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
 
 
-            if (_loading) const SpinKitDoubleBounce(color: Color(0xFF0d47A1)),
-            if (_error)
-              Text(texterror,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Cairo',
-                    color: Colors.red,
-                  )),
-            if (_done)
-              Text(textdone,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Cairo',
-                    color: Colors.green,
-                  )),
-          ]),
+                if (_loading) const SpinKitDoubleBounce(color: Color(0xFF0d47A1)),
+                if (_error)
+                  Text(texterror,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Cairo',
+                        color: Colors.red,
+                      )),
+                if (_done)
+                  Text(textdone,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Cairo',
+                        color: Colors.green,
+                      )),
+              ]),
         ),
       ),
     );

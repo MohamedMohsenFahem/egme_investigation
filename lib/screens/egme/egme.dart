@@ -332,6 +332,7 @@ class _EGMEState extends State<EGME> {
       List<Subject_model> fetchedSubjects = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         return Subject_model(
+          id: doc.id,
           event: data['event'] ?? '',
           reg: data['reg'] ?? '',
           date: data['date'] ?? '',
@@ -693,6 +694,7 @@ class _EGMEState extends State<EGME> {
                         return ListView.builder(
                           itemCount: _foundSubject!.length,
                           itemBuilder: (BuildContext context, int index) {
+                            final docID = _foundSubject![index].id;
                             // Pass each Subject_model object to customListTile
                             return customListTile(
                                 _foundSubject![index], context);

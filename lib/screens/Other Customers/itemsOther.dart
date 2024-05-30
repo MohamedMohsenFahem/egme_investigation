@@ -91,9 +91,9 @@ Widget customListTile(Subject_model subject, BuildContext context) {
                   onPressed: () async {
                     try {
                       await FirebaseFirestore.instance
-                          .collection('SubjectEGME')
+                          .collection('SubjectOther')
                           .doc(subject.id)
-                          ;
+                         ;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Field deleted successfully')),
                       );
